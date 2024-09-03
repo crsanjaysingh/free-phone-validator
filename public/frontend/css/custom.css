@@ -1,0 +1,84 @@
+.guest-validator-section {
+    background-color: #8c58ff;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.guest-validator-section .content {
+    text-align: center;
+    margin: 20px 0; /* 20px top and bottom, 0 left and right */
+    padding: 15px 0; /* 15px top and bottom, 0 left and right */
+}
+
+.guest-validator-section .heading {
+    color: rgb(253 212 71);
+    font-size: 45px;
+    font-weight: 600;
+    line-height: 1.2;
+    max-width: 650px;
+    margin: 0 auto 20px; /* Center heading and add spacing */
+}
+
+.guest-validator-section .description {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    max-width: 650px; 
+    margin: 0 auto 20px; /* Center description and add spacing */
+}
+
+.guest-validator-section form {
+    margin-top: 20px; /* Add some spacing above the form */
+}
+.content-form-group{
+    position: relative;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    gap: 3px;
+}
+.guest-validator-section button{
+    color: #fff;
+    background-color: #8c57ff;
+    border-color: #8c57ff;
+    left: -100px;
+}
+.guest-validator-section form input {
+    width: 100%;
+    padding: 20px 109px 20px 30px;
+    border-radius: 18px;
+    background: #fff;
+    color: #5b657e;
+    border: 1px solid transparent;
+    transition: all .3s ease-out 0s;
+}
+.guest-validator-section .main-btn {
+    display: inline-block;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 3px 13px 3px 7px;
+    font-size: 18px;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 5;
+    transition: all .4s ease-in-out;
+    border: none;
+    background: #8c57ff;
+    overflow: hidden;
+}
+#error-message {
+    text-align: left !important;
+    color:#FFF; 
+    margin-top: 5px;
+    font-size: 14px; 
+}

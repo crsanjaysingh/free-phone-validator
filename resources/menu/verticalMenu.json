@@ -1,0 +1,300 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboards",
+      "icon": "menu-icon tf-icons ri-home-smile-line",
+      "slug": "dashboard",
+      "badge": [
+        "",
+        ""
+      ],
+      "submenu": [
+        {
+          "url": "/theme/",
+          "name": "Analytics",
+          "slug": "dashboard-analytics"
+        }
+      ]
+    },
+    {
+      "name": "Layouts",
+      "icon": "menu-icon tf-icons ri-layout-2-line",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "theme/layouts/without-menu",
+          "name": "Without menu",
+          "slug": "layouts-without-menu"
+        },
+        {
+          "url": "theme/layouts/without-navbar",
+          "name": "Without navbar",
+          "slug": "layouts-without-navbar"
+        },
+        {
+          "url": "theme/layouts/container",
+          "name": "Container",
+          "slug": "layouts-container"
+        },
+        {
+          "url": "theme/layouts/fluid",
+          "name": "Fluid",
+          "slug": "layouts-fluid"
+        },
+        {
+          "url": "theme/layouts/blank",
+          "name": "Blank",
+          "slug": "layouts-blank",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "menuHeader": "Apps & Pages"
+    },
+    {
+      "name": "Account Settings",
+      "icon": "menu-icon tf-icons ri-layout-left-line",
+      "slug": "pages-account-settings",
+      "submenu": [
+        {
+          "url": "theme/pages/account-settings-account",
+          "name": "Account",
+          "slug": "pages-account-settings-account"
+        },
+        {
+          "url": "theme/pages/account-settings-notifications",
+          "name": "Notifications",
+          "slug": "theme/pages-account-settings-notifications"
+        },
+        {
+          "url": "theme/pages/account-settings-connections",
+          "name": "Connections",
+          "slug": "pages-account-settings-connections"
+        }
+      ]
+    },
+    {
+      "name": "Authentications",
+      "icon": "menu-icon tf-icons ri-shield-keyhole-line",
+      "slug": "auth",
+      "submenu": [
+        {
+          "url": "theme/auth/login-basic",
+          "name": "Login",
+          "slug": "auth-login-basic",
+          "target": "_blank"
+        },
+        {
+          "url": "theme/auth/register-basic",
+          "name": "Register",
+          "slug": "auth-register-basic",
+          "target": "_blank"
+        },
+        {
+          "url": "theme/auth/forgot-password-basic",
+          "name": "Forgot Password",
+          "slug": "auth-forgot-password-basic",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "name": "Misc",
+      "icon": "menu-icon tf-icons ri-instance-line",
+      "slug": "pages-misc",
+      "submenu": [
+        {
+          "url": "theme/pages/misc-error",
+          "name": "Error",
+          "slug": "pages-misc-error",
+          "target": "_blank"
+        },
+        {
+          "url": "theme/pages/misc-under-maintenance",
+          "name": "Under Maintenance",
+          "slug": "pages-misc-under-maintenance",
+          "target": "_blank"
+        }
+      ]
+    },
+    {
+      "menuHeader": "Components"
+    },
+    {
+      "name": "Cards",
+      "icon": "menu-icon tf-icons ri-bank-card-2-line",
+      "slug": "cards-basic",
+      "url": "theme/cards/basic"
+    },
+    {
+      "name": "User interface",
+      "icon": "menu-icon tf-icons ri-toggle-line",
+      "slug": "ui",
+      "submenu": [
+        {
+          "url": "theme/ui/accordion",
+          "name": "Accordion",
+          "slug": "ui-accordion"
+        },
+        {
+          "url": "theme/ui/alerts",
+          "name": "Alerts",
+          "slug": "ui-alerts"
+        },
+        {
+          "url": "theme/ui/badges",
+          "name": "theme/Badges",
+          "slug": "ui-badges"
+        },
+        {
+          "url": "theme/ui/buttons",
+          "name": "Buttons",
+          "slug": "ui-buttons"
+        },
+        {
+          "url": "theme/ui/carousel",
+          "name": "Carousel",
+          "slug": "ui-carousel"
+        },
+        {
+          "url": "theme/ui/collapse",
+          "name": "Collapse",
+          "slug": "ui-collapse"
+        },
+        {
+          "url": "theme/ui/dropdowns",
+          "name": "Dropdowns",
+          "slug": "ui-dropdowns"
+        },
+        {
+          "url": "theme/ui/footer",
+          "name": "Footer",
+          "slug": "ui-footer"
+        },
+        {
+          "url": "theme/ui/list-groups",
+          "name": "List Groups",
+          "slug": "ui-list-groups"
+        },
+        {
+          "url": "theme/ui/modals",
+          "name": "Modals",
+          "slug": "ui-modals"
+        },
+        {
+          "url": "theme/ui/navbar",
+          "name": "Navbar",
+          "slug": "ui-navbar"
+        },
+        {
+          "url": "theme/ui/offcanvas",
+          "name": "Offcanvas",
+          "slug": "ui-offcanvas"
+        },
+        {
+          "url": "theme/ui/pagination-breadcrumbs",
+          "name": "Pagination & Breadcrumbs",
+          "slug": "ui-pagination-breadcrumbs"
+        },
+        {
+          "url": "theme/ui/progress",
+          "name": "Progress",
+          "slug": "ui-progress"
+        },
+        {
+          "url": "theme/ui/spinners",
+          "name": "Spinners",
+          "slug": "ui-spinners"
+        },
+        {
+          "url": "theme/ui/tabs-pills",
+          "name": "Tabs & Pills",
+          "slug": "ui-tabs-pills"
+        },
+        {
+          "url": "theme/ui/toasts",
+          "name": "Toasts",
+          "slug": "ui-toasts"
+        },
+        {
+          "url": "theme/ui/tooltips-popovers",
+          "name": "Tooltips & Popovers",
+          "slug": "ui-tooltips-popovers"
+        },
+        {
+          "url": "theme/ui/typography",
+          "name": "Typography",
+          "slug": "ui-typography"
+        }
+      ]
+    },
+    {
+      "name": "Extended UI",
+      "icon": "menu-icon tf-icons ri-box-3-line",
+      "slug": "extended",
+      "submenu": [
+        {
+          "url": "theme/extended/ui-perfect-scrollbar",
+          "name": "Perfect Scrollbar",
+          "slug": "extended-ui-perfect-scrollbar"
+        },
+        {
+          "url": "theme/extended/ui-text-divider",
+          "name": "Text Divider",
+          "slug": "extended-ui-text-divider"
+        }
+      ]
+    },
+    {
+      "url": "theme/icons/icons-ri",
+      "icon": "menu-icon tf-icons ri-remixicon-line",
+      "name": "Icons",
+      "slug": "icons-ri"
+    },
+    {
+      "menuHeader": "Forms & Tables"
+    },
+    {
+      "name": "Form Elements",
+      "icon": "menu-icon tf-icons ri-radio-button-line",
+      "slug": "forms",
+      "submenu": [
+        {
+          "url": "theme/forms/basic-inputs",
+          "name": "Basic Inputs",
+          "slug": "forms-basic-inputs"
+        },
+        {
+          "url": "theme/forms/input-groups",
+          "name": "Input groups",
+          "slug": "forms-input-groups"
+        }
+      ]
+    },
+    {
+      "name": "Form Layouts",
+      "icon": "menu-icon tf-icons ri-box-3-line",
+      "slug": "form-layouts",
+      "submenu": [
+        {
+          "url": "theme/form/layouts-vertical",
+          "name": "Vertical Form",
+          "slug": "form-layouts-vertical"
+        },
+        {
+          "url": "theme/form/layouts-horizontal",
+          "name": "Horizontal Form",
+          "slug": "form-layouts-horizontal"
+        }
+      ]
+    },
+    {
+      "url": "theme/tables/basic",
+      "icon": "menu-icon tf-icons ri-table-alt-line",
+      "name": "Tables",
+      "slug": "tables-basic"
+    }
+  ]
+}
