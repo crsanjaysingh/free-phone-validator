@@ -15,7 +15,7 @@
 }
 
 /*===========================
-    01.COMMON css 
+    01.COMMON css
 ===========================*/
 html {
   scroll-behavior: smooth;
@@ -592,6 +592,7 @@ p {
   top: 0;
   left: 0;
   width: 100%;
+  background-color: #fcfcff;
   z-index: 99;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
@@ -724,7 +725,7 @@ p {
 .navbar-nav .nav-item a {
   font-size: 18px;
   font-weight: 400;
-  color: #fff;
+  color: #162447;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   padding: 10px 0;
@@ -770,7 +771,7 @@ p {
 .hero-section {
   position: relative;
   z-index: 1;
-  padding: 181px 0 50px;
+  padding: 184px 0 50px;
   background-image: url('../img/hero/hero-bg.svg');
   background-position: top center;
   background-repeat: no-repeat;
@@ -1227,6 +1228,7 @@ p {
 .feature-extended-section .feature-extended-wrapper {
   padding: 70px 0;
   background: rgba(88, 100, 255, 0.1);
+  /* margin-top: 86px; */
 }
 
 .feature-extended-section .single-feature-extended {

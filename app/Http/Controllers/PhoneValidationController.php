@@ -23,10 +23,10 @@ class PhoneValidationController extends Controller
         $phone = $request->input('phone');
         $result = $this->phoneValidationService->validatePhone($phone);
 
-        if ($result['success'] && $result['valid']) {
-            return response()->json(['message' => 'Phone number is valid', 'data' => $result]);
+        if ($result['message']==="Phone is valid.") {
+            return response()->json(['status'=>'valid', 'data' => $result], 200);
         } else {
-            return response()->json(['message' => 'Phone number is invalid', 'data' => $result], 422);
+            return response()->json(['status'=>'invalid', 'data' => $result], 422);
         }
     }
 }

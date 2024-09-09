@@ -19,11 +19,11 @@
     const logo = document.querySelector(".navbar-brand img");
 
     if (window.pageYOffset > sticky) {
-      header_navbar.classList.add("sticky");
+      header_navbar.classList.add("sticky-top");
       logo.src = "assets/img/logo/logo-2.svg";
     } else {
-      header_navbar.classList.remove("sticky");
-      logo.src = "assets/img/logo/logo.svg";
+      header_navbar.classList.remove("sticky-top");
+      logo.src = "assets/img/logo/logo-2.svg";
     }
 
     // show or hide the back-top-top button

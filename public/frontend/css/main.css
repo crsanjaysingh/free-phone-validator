@@ -284,7 +284,7 @@ p {
 .scroll-top {
   width: 45px;
   height: 45px;
-  background: #8c57ff;
+  /* background: #8c57ff; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -724,7 +724,7 @@ p {
 .navbar-nav .nav-item a {
   font-size: 18px;
   font-weight: 400;
-  color: #fff;
+  color:#162447;
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   padding: 10px 0;

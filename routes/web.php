@@ -2,14 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PhoneValidationController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    // return view('welcome');
-    return view('home');
-});
+    return view('frontend.home', ['title' => 'Home Page']);
+})->name('home');
+Route::get('/about', function () {
+    return view('frontend.about');
+})->name('about');
 
-Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->name('validate.phone');;
+Route::get('contact', [ContactController::class, 'index'])->name('contact.get');
+Route::post('contact', [ContactController::class, 'contact'])->name('contact.post');
+
+Route::get('/privacy-policy', function () {
+    return view('frontend.privacy-policy');
+})->name('privacy.policy');
+
+Route::get('/terms-of-service', function () {
+    return view('frontend.terms-of-service');
+})->name('terms.of.service');
+
+Route::get('/refund-policy', function () {
+    return view('frontend.refund-policy');
+})->name('refund.policy');
+
+Route::get('/faqs', function () {
+    return view('frontend.faqs');
+})->name('faqs');
+// 1440 minutey7t for a day
+Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:1,1')->name('validate.phone');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

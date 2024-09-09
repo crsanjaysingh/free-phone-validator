@@ -23,7 +23,7 @@
       logo.src = 'frontend/img/logo/logo-2.svg';
     } else {
       header_navbar.classList.remove('sticky');
-      logo.src = 'frontend/img/logo/logo.svg';
+      logo.src = 'frontend/img/logo/logo-2.svg';
     }
 
     // show or hide the back-top-top button
@@ -49,20 +49,46 @@
   });
 
   // section menu active
+  // function onScroll(event) {
+  //   const sections = document.querySelectorAll('.page-scroll');
+  //   const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+  //   for (let i = 0; i < sections.length; i++) {
+  //     const currLink = sections[i];
+  //     const val = currLink.getAttribute('href');
+  //     const refElement = document.querySelector(val);
+  //     const scrollTopMinus = scrollPos + 73;
+  //     if (refElement.offsetTop <= scrollTopMinus && refElement.offsetTop + refElement.offsetHeight > scrollTopMinus) {
+  //       document.querySelector('.page-scroll').classList.remove('active');
+  //       currLink.classList.add('active');
+  //     } else {
+  //       currLink.classList.remove('active');
+  //     }
+  //   }
+  // }
   function onScroll(event) {
     const sections = document.querySelectorAll('.page-scroll');
     const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-
+  
     for (let i = 0; i < sections.length; i++) {
       const currLink = sections[i];
       const val = currLink.getAttribute('href');
+      
+      // Skip if val is not a valid selector or is 'javascript:void(0)'
+      if (val === 'javascript:void(0)' || !val.startsWith('#')) {
+        continue;
+      }
+  
       const refElement = document.querySelector(val);
-      const scrollTopMinus = scrollPos + 73;
-      if (refElement.offsetTop <= scrollTopMinus && refElement.offsetTop + refElement.offsetHeight > scrollTopMinus) {
-        document.querySelector('.page-scroll').classList.remove('active');
-        currLink.classList.add('active');
-      } else {
-        currLink.classList.remove('active');
+  
+      if (refElement) { // Check if refElement is not null
+        const scrollTopMinus = scrollPos + 73;
+        if (refElement.offsetTop <= scrollTopMinus && refElement.offsetTop + refElement.offsetHeight > scrollTopMinus) {
+          document.querySelector('.page-scroll.active')?.classList.remove('active'); // Remove 'active' class from any currently active link
+          currLink.classList.add('active');
+        } else {
+          currLink.classList.remove('active');
+        }
       }
     }
   }
