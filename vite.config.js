@@ -11,6 +11,7 @@ import { glob } from 'glob';
 function GetFilesArray(query) {
   return glob.sync(query);
 }
+
 /**
  * Js Files
  */
@@ -46,7 +47,9 @@ export default defineConfig({
         'resources/assets/frontend/css/frontend-main.css',
         'resources/assets/frontend/css/animate.css',
         'resources/assets/frontend/css/lineicons.css',
+        'resources/assets/frontend/css/home-page.css',
         'resources/assets/frontend/js/frontend-main.js',
+        'resources/assets/frontend/js/home-page.js',
         ...pageJsFiles,
         ...vendorJsFiles,
         ...LibsJsFiles,
@@ -58,5 +61,42 @@ export default defineConfig({
       refresh: true
     }),
     html()
-  ]
+  ],
+  build: {
+    // Increase the chunk size limit to avoid warnings
+    chunkSizeWarningLimit: 2500,
+
+    // Enable manual chunking for better splitting
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('apexcharts')) {
+              return 'apexcharts';
+            }
+            if (id.includes('jquery')) {
+              return 'jquery';
+            }
+            if (id.includes('bootstrap')) {
+              return 'bootstrap';
+            }
+            if (id.includes('lodash')) {
+              return 'lodash';
+            }
+            // Create vendor chunk for all node_modules
+            return 'vendor';
+          }
+
+          // Splitting specific libraries for better control
+          if (id.includes('resources/assets/vendor/libs')) {
+            return 'libs';
+          }
+
+          if (id.includes('resources/assets/js')) {
+            return 'page-js';
+          }
+        }
+      }
+    }
+  }
 });
