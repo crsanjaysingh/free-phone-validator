@@ -67,38 +67,5 @@ export default defineConfig({
   build: {
     // Increase the chunk size limit to avoid warnings
     chunkSizeWarningLimit: 2500,
-
-    // Enable manual chunking for better splitting
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('apexcharts')) {
-              return 'apexcharts';
-            }
-            if (id.includes('jquery')) {
-              return 'jquery';
-            }
-            if (id.includes('bootstrap')) {
-              return 'bootstrap';
-            }
-            if (id.includes('lodash')) {
-              return 'lodash';
-            }
-            // Create vendor chunk for all node_modules
-            return 'vendor';
-          }
-
-          // Splitting specific libraries for better control
-          if (id.includes('resources/assets/vendor/libs')) {
-            return 'libs';
-          }
-
-          if (id.includes('resources/assets/js')) {
-            return 'page-js';
-          }
-        }
-      }
-    }
   }
 });
