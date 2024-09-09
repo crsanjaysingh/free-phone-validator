@@ -20,9 +20,15 @@
                             and to distinguish cell phone (mobile) from landlines. Clean your customer database of invalid
                             or outdated phone numbers to increase conversions and deliverability.
                         </p>
+                        @guest
+                            <a href="{{ route('login') }}" class="main-btn border-btn btn-hover wow fadeInUp"
+                                data-wow-delay=".6s">Purchase Now</a>
+                        @else
+                            <a href="javascript:void(0)" class="main-btn border-btn btn-hover wow fadeInUp"
+                                data-wow-delay=".6s">Purchase
+                                Now</a>
+                        @endguest
 
-                        <a href="javascript:void(0)" class="main-btn border-btn btn-hover wow fadeInUp"
-                            data-wow-delay=".6s">Purchase Now</a>
                         <a href="#features" class="scroll-bottom">
                             <i class="lni lni-arrow-down"></i></a>
                     </div>

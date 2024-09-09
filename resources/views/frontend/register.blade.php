@@ -9,7 +9,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="card single-feature-extended">
                             <div class="card content">
-                                <h3 class="text-center">Login Form</h3>
+                                <h3 class="text-center">Registration Form</h3>
                                 <div class="content">
                                     <form id="registerForm" action="{{ route('register') }}"
                                         data-dashboard-url="{{ route('login') }}">
@@ -36,8 +36,13 @@
                                                     id="password_confirmation" class="form-control">
                                                 <div class="error"></div>
                                             </div>
-                                            <div class="mt-2 form-group col-md-12">
+                                            <div class="mt-2 form-group col-md-6">
                                                 <button type="submit" class="btn btn-primary">Register</button>
+                                                <div id="form-errors" class="error-container"></div>
+                                            </div>
+                                            <div class="mt-2 form-group col-md-6" style="text-align: right">
+                                                <a href="{{ route('login') }}" class="btn btn-primary">Already have an
+                                                    account? Login here</a>
                                                 <div id="form-errors" class="error-container"></div>
                                             </div>
                                         </div>

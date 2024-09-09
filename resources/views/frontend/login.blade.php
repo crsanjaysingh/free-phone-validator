@@ -34,14 +34,19 @@
                                                         me</span>
                                                 </label>
                                             </div>
+                                            <div class="mt-2 form-group col-md-12" style="text-align: right">
+                                                <a class="" href="{{ route('password.request') }}">
+                                                    Forgot your password?
+                                                </a>
+                                            </div>
                                             <div class="mt-2 form-group col-md-6">
                                                 <button type="submit" class="btn btn-primary">Login</button>
                                                 <div id="form-errors" class="error-container"></div>
                                             </div>
                                             <div class="mt-2 form-group col-md-6" style="text-align: right">
-                                                <a class="" href="{{ route('password.request') }}">
-                                                    Forgot your password?
-                                                </a>
+                                                <a href="{{ route('register') }}" class="btn btn-primary">New User? Register
+                                                    Now</a>
+                                                <div id="form-errors" class="error-container"></div>
                                             </div>
                                         </div>
                                     </form>

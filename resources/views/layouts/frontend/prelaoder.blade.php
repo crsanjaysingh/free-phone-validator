@@ -1,4 +1,4 @@
-<div class="preloader">
+<div class="preloader" id="preloader">
     <div class="loader">
         <div class="spinner">
             <div class="spinner-container">

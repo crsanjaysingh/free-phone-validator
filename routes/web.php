@@ -30,8 +30,8 @@ Route::get('/refund-policy', function () {
 Route::get('/faqs', function () {
     return view('frontend.faqs');
 })->name('faqs');
-// 1440 minutey7t for a day
-Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:1,1')->name('validate.phone');
+// 1440 minute for a day
+Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:20,1440')->name('validate.phone');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

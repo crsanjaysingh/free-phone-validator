@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>{{ $title ??config('app.name', 'Call Validater') }}</title>
-    <meta name="description" content="Welcome to Knot Networks LLC, a leading American telecommunication service provider specializing in offering Toll Free Numbers to businesses of all sizes." />
+    <title>{{ $title ?? config('app.name', 'Call Validater') }}</title>
+    <meta name="description"
+        content="Welcome to Knot Networks LLC, a leading American telecommunication service provider specializing in offering Toll Free Numbers to businesses of all sizes." />
     <meta name="keywords" content="Knot Networks LLC  Telecommunication,toll free service provider,toll free number">
     <link rel="canonical" href="https://www.knotnetworks.com/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,6 +57,17 @@
     @vite('resources/assets/frontend/js/home-page.js')
     <!-- Page Specific JS -->
     @stack('scripts')
+    <script>
+        // Show preloader
+        function showPreloader() {
+            $('.preloader').show(); // Ensure display is set to block/flex
+        }
+
+        // Hide preloader
+        function hidePreloader() {
+            $('.preloader').hide(); // Hides the preloader
+        }
+    </script>
 </body>
 
 </html>
