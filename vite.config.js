@@ -18,6 +18,9 @@ function GetFilesArray(query) {
 // Page JS Files
 const pageJsFiles = GetFilesArray('resources/assets/js/*.js');
 
+// Frontend JS Files
+const frontendJsFiles = GetFilesArray('resources/assets/frontend/js/*.js');
+
 // Processing Vendor JS Files
 const vendorJsFiles = GetFilesArray('resources/assets/vendor/js/*.js');
 
@@ -37,6 +40,9 @@ const LibsCssFiles = GetFilesArray('resources/assets/vendor/libs/**/*.css');
 // Processing Fonts Scss Files
 const FontsScssFiles = GetFilesArray('resources/assets/vendor/fonts/**/!(_)*.scss');
 
+// Frontend CSS Files
+const frontendCssFiles = GetFilesArray('resources/assets/frontend/css/*.css');
+
 export default defineConfig({
   plugins: [
     laravel({
@@ -48,15 +54,15 @@ export default defineConfig({
         'resources/assets/frontend/css/animate.css',
         'resources/assets/frontend/css/lineicons.css',
         'resources/assets/frontend/css/home-page.css',
-        'resources/assets/frontend/js/frontend-main.js',
-        'resources/assets/frontend/js/home-page.js',
         ...pageJsFiles,
+        ...frontendJsFiles,
         ...vendorJsFiles,
         ...LibsJsFiles,
         ...CoreScssFiles,
         ...LibsScssFiles,
         ...LibsCssFiles,
-        ...FontsScssFiles
+        ...FontsScssFiles,
+        ...frontendCssFiles
       ],
       refresh: true
     }),
