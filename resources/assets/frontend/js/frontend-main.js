@@ -20,10 +20,12 @@
 
     if (window.pageYOffset > sticky) {
       header_navbar.classList.add('sticky');
-      logo.src = 'frontend/img/logo/logo-2.svg';
+      // logo.src = 'frontend/img/logo/logo-2.svg';
+      logo.src = 'assets/img/favicon/logo.png';
     } else {
       header_navbar.classList.remove('sticky');
-      logo.src = 'frontend/img/logo/logo-2.svg';
+      logo.src = 'assets/img/favicon/logo.png';
+      // logo.src = 'frontend/img/logo/logo-2.svg';
     }
 
     // show or hide the back-top-top button
@@ -69,18 +71,18 @@
   function onScroll(event) {
     const sections = document.querySelectorAll('.page-scroll');
     const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-  
+
     for (let i = 0; i < sections.length; i++) {
       const currLink = sections[i];
       const val = currLink.getAttribute('href');
-      
+
       // Skip if val is not a valid selector or is 'javascript:void(0)'
       if (val === 'javascript:void(0)' || !val.startsWith('#')) {
         continue;
       }
-  
+
       const refElement = document.querySelector(val);
-  
+
       if (refElement) { // Check if refElement is not null
         const scrollTopMinus = scrollPos + 73;
         if (refElement.offsetTop <= scrollTopMinus && refElement.offsetTop + refElement.offsetHeight > scrollTopMinus) {

@@ -47,6 +47,7 @@
                                             </div>
                                         </div>
                                     </form>
+                                    <div id="recaptcha-container"></div>
                                 </div>
                             </div>
                         </div>
@@ -68,4 +69,6 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     @vite('resources/assets/frontend/js/register-page.js')
+    <!-- Include the reCAPTCHA v3 script -->
+    <x-reCAPTCHA />
 @endpush

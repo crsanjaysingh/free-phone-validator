@@ -120,59 +120,11 @@
                             <div class="text-center icon">
                                 <i class="lni lni-rocket"></i>
                             </div>
-                            <div class="content">
-                                <h3 class="text-center">Highly Optimized</h3>
-                                <p>
-                                    In the dynamic telecommunications sector, delivering high-performance and reliable
-                                    services is crucial. For companies offering services, optimizing these solutions can
-                                    significantly enhance user experience and operational efficiency. Here’s an in-depth
-                                    look at how to achieve highly optimized services:
-                                </p>
-                                <ul class="mt-3 list-unstyled ps-0">
-                                    <li class="mb-3">
-                                        <p><strong>Precision and Real-Time Tracking:</strong> Optimization in phone locator
-                                            services focuses on leveraging advanced GPS and cellular network technologies to
-                                            provide precise, real-time location tracking. Implementing state-of-the-art
-                                            algorithms and data fusion techniques ensures high accuracy and responsiveness.
-                                        </p>
-                                    </li>
-                                    <li class="mb-3">
-                                        <p><strong>Scalability and Performance:</strong> A well-optimized system should
-                                            handle increasing volumes of location requests efficiently. This involves
-                                            optimizing server infrastructure and using load balancing to manage high traffic
-                                            without compromising service quality.</p>
-                                    </li>
-                                    <li class="mb-3">
-                                        <p><strong>User Interface and Experience:</strong> Streamlining the user interface
-                                            for both end-users and administrators is crucial. An optimized phone locator
-                                            service should offer a clean, intuitive interface that simplifies the tracking
-                                            process and provides actionable insights with minimal user effort.</p>
-                                    </li>
-                                    <li class="mb-3">
-                                        <p><strong>Integration Capabilities:</strong> Seamless integration with other
-                                            telecom and third-party services can enhance functionality. Optimizing APIs and
-                                            data exchange processes ensures that phone locator services work harmoniously
-                                            with existing systems and applications.</p>
-                                    </li>
-                                    <li class="mb-3">
-                                        <p><strong>Cost Efficiency:</strong> Streamlining billing processes and optimizing
-                                            cost management for VoIP services can help reduce operational expenses.
-                                            Real-time monitoring and cost tracking features can provide insights and control
-                                            over usage and expenditures.</p>
-                                    </li>
-                                    <li class="mb-3">
-                                        <p><strong>Security Measures:</strong> Ensuring secure VoIP communications involves
-                                            implementing encryption protocols, secure signaling, and regular vulnerability
-                                            assessments. An optimized security framework helps protect against fraud,
-                                            eavesdropping, and other cyber threats.</p>
-                                    </li>
-                                    <li class="mb-3">
-                                        <p><strong>Accuracy and Precision:</strong> Real-time validation and comprehensive
-                                            data checks ensure accuracy in phone validation systems, reducing false
-                                            positives and negatives.</p>
-                                    </li>
-                                </ul>
-                            </div>
+                        </div>
+                        <div class="content">
+                            <p>Real-time validation and comprehensive
+                                data checks ensure accuracy in phone validation systems, reducing false
+                                positives and negatives.</p>
                         </div>
                     </div>
                 </div>
@@ -187,5 +139,6 @@
 @endpush
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     @vite('resources/assets/frontend/js/home-page.js')
 @endpush

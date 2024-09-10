@@ -11,17 +11,25 @@
     <link rel="canonical" href="https://www.knotnetworks.com/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.png') }}" />
     <!-- Place favicon.ico in the root directory -->
 
     <!-- ======== CSS here ======== -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}" /> --}}
+
+    @vite('resources/assets/frontend/css/bootstrap.min.css')
     @vite('resources/assets/frontend/css/frontend-main.css')
     @vite('resources/assets/frontend/css/animate.css')
     @vite('resources/assets/frontend/css/lineicons.css')
+    @vite('resources/assets/frontend/css/custom.css')
     <!-- Page Specific CSS -->
     @stack('styles')
+    <style>
+        .footer-widget .logo img {
+            max-width: 250px;
+        }
+    </style>
 </head>
 
 <body>
@@ -48,13 +56,10 @@
     </a>
 
     <!-- ======== JS here ======== -->
-    {{-- <script src="assets/js/frontend-main.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    @vite('resources/assets/frontend/js/bootstrap.bundle.min.js')
     @vite('resources/assets/frontend/js/frontend-main.js')
-    <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/wow.bundle.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
-    @vite('resources/assets/frontend/js/home-page.js')
+    @vite('resources/assets/frontend/js/wow.bundle.min.js')
     <!-- Page Specific JS -->
     @stack('scripts')
     <script>
@@ -67,6 +72,11 @@
         function hidePreloader() {
             $('.preloader').hide(); // Hides the preloader
         }
+
+        // Added Select Validation
+        $.validator.addMethod("valueNotEquals", function(value, element, arg) {
+            return value !== arg;
+        }, "Value must not equal arg.");
     </script>
 </body>
 

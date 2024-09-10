@@ -34,7 +34,8 @@
                     <div class="footer-widget">
                         <div class="logo mb-50">
                             <a href="#">
-                                <img src="{{ asset('frontend/img/logo/logo.svg') }}" alt="Sticky Logo" />
+                                {{-- <img src="{{ asset('frontend/img/logo/logo.svg') }}" alt="Sticky Logo" /> --}}
+                                <img src="{{ asset('assets/img/favicon/logo.png') }}" alt="Sticky Logo" />
                             </a>
                         </div>
                         <p class="text-white desc mb-30">
@@ -110,7 +111,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="text-center text-white col-md-12 footer-widget">Copyright © {{ date('Y') }} Knotnetworks
+                <div class="text-center text-white col-md-12 footer-widget">Copyright ©2020-{{ date('Y') }}
+                    Knotnetworks
                     LLC . All Rights Reserved</div>
             </div>
         </div>

@@ -6,41 +6,50 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    return view('frontend.home', ['title' => 'Home Page']);
+  return view('frontend.home', ['title' => 'Home Page']);
 })->name('home');
+
+Route::get('/login-new', function () {
+  return view('frontend.new-login', ['title' => 'Home Page']);
+})->name('login.new');
+
+Route::get('/register-new', function () {
+  return view('frontend.new-register', ['title' => 'Home Page']);
+})->name('register.new');
+
 Route::get('/about', function () {
-    return view('frontend.about');
+  return view('frontend.about');
 })->name('about');
 
 Route::get('contact', [ContactController::class, 'index'])->name('contact.get');
 Route::post('contact', [ContactController::class, 'contact'])->name('contact.post');
 
 Route::get('/privacy-policy', function () {
-    return view('frontend.privacy-policy');
+  return view('frontend.privacy-policy');
 })->name('privacy.policy');
 
 Route::get('/terms-of-service', function () {
-    return view('frontend.terms-of-service');
+  return view('frontend.terms-of-service');
 })->name('terms.of.service');
 
 Route::get('/refund-policy', function () {
-    return view('frontend.refund-policy');
+  return view('frontend.refund-policy');
 })->name('refund.policy');
 
 Route::get('/faqs', function () {
-    return view('frontend.faqs');
+  return view('frontend.faqs');
 })->name('faqs');
 // 1440 minute for a day
-Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:20,1440')->name('validate.phone');
+Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:10,1440')->name('validate.phone');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+  return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+  Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
