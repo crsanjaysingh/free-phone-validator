@@ -1,0 +1,28 @@
+[0;1;32m●[0m mariadb.service - MariaDB 10.6.18 database server
+     Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Mon 2024-09-09 23:46:10 UTC; 19h ago
+       Docs: man:mariadbd(8)
+             https://mariadb.com/kb/en/library/systemd/
+    Process: 1542 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+    Process: 1567 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 1571 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`cd /usr/bin/..; /usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemctl set-environment _WSREP_START_POSITION=$VAR || exit 1 (code=exited, status=0/SUCCESS)
+    Process: 1713 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+    Process: 1719 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+   Main PID: 1668 (mariadbd)
+     Status: "Taking your SQL requests now..."
+      Tasks: 7 (limit: 1019036)
+     Memory: 100.8M
+        CPU: 8.990s
+     CGroup: /system.slice/mariadb.service
+             └─1668 /usr/sbin/mariadbd
+
+Sep 10 18:21:43 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:21:43 2975 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:21:43 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:21:43 2976 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:21:43 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:21:43 2977 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:21:43 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:21:43 2978 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:21:54 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:21:54 2979 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:25:01 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:25:01 2980 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:25:07 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:25:07 2981 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:25:29 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:25:29 2982 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:25:30 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:25:30 2983 [Warning] Access denied for user 'root'@'localhost'
+Sep 10 18:26:24 host-192-155-100-21.example.com mariadbd[1668]: 2024-09-10 18:26:24 2984 [Warning] Access denied for user 'root'@'localhost'
