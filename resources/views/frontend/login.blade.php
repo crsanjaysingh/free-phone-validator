@@ -49,8 +49,9 @@
                                                 <div id="form-errors" class="error-container"></div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"
+                                            value="">
                                     </form>
-                                    <div id="recaptcha-container"></div>
                                 </div>
                             </div>
                         </div>
@@ -64,28 +65,18 @@
 @endsection
 @push('styles')
     <!-- ======== Page Level CSS ======== -->
-    <!-- Add the custom CSS here -->
-    {{-- <style>
-        body {
-            background-image: url('https://img.freepik.com/free-vector/futuristic-technology-background_52683-35443.jpg?t=st=1725917986~exp=1725921586~hmac=b918fa9c5be66e05490b1765a5f69dc9699a19b958d37b1d6a4c62e8effdc191&w=2000');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .div-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-    </style> --}}
 @endpush
 
 @push('scripts')
     <script>
         var dashboardUrl = "{{ route('dashboard') }}";
+        var host = window.location.hostname;
+        var recaptchaAction;
+        if (host === "localhost" || host === "127.0.0.1") {
+            recaptchaAction = "{{ 'login' }}";
+        } else {
+            recaptchaAction = "{{ route('login') }}";
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     @vite('resources/assets/frontend/js/login-page.js')

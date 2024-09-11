@@ -1,15 +1,12 @@
-<script src="https://www.google.com/recaptcha/api.js?onload=vCallback&render=explicit" async defer></script>
-
+<script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
 <script>
-    function vCallback() {
-        var recaptchaElement = grecaptcha.render('recaptcha-container', {
-            'sitekey': '{{ env('RECAPTCHA_SITE_KEY') }}',
-            'callback': function(response) {
-                console.log('reCAPTCHA verified', response);
-            },
-            'expiredCallback': function() {
-                console.log('reCAPTCHA expired');
-            },
+    grecaptcha.ready(function() {
+        grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {
+            action: recaptchaAction
+        }).then(function(token) {
+            if (token) {
+                $("#g-recaptcha-response").val(token);
+            }
         });
-    }
+    });
 </script>

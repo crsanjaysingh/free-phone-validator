@@ -46,8 +46,9 @@
                                                 <div id="form-errors" class="error-container"></div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"
+                                            value="">
                                     </form>
-                                    <div id="recaptcha-container"></div>
                                 </div>
                             </div>
                         </div>
@@ -66,6 +67,13 @@
 @push('scripts')
     <script>
         var dashboardUrl = "{{ route('dashboard') }}";
+        var host = window.location.hostname;
+        var recaptchaAction;
+        if (host === "localhost" || host === "127.0.0.1") {
+            recaptchaAction = "{{ 'register' }}";
+        } else {
+            recaptchaAction = "{{ route('register') }}";
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     @vite('resources/assets/frontend/js/register-page.js')
