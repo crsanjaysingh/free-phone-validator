@@ -11,7 +11,7 @@ class RecaptchaService
 
   public function __construct()
   {
-    $this->recaptcha = new ReCaptcha(env('RECAPTCHA_SECRET_KEY'));
+    $this->recaptcha = new ReCaptcha(config('services.recaptcha.secret_key'));
   }
 
   public function verify(Request $request)

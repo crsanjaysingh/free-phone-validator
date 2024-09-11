@@ -57,6 +57,7 @@ $(document).ready(function() {
                   // Check if the response is JSON
                   if (xhr.responseJSON) {
                       var response = xhr.responseJSON;
+                      console.log(response);
                       var statusCode = xhr.status;
                       var errors = response.errors || {};
 
