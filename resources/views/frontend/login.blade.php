@@ -70,13 +70,7 @@
 @push('scripts')
     <script>
         var dashboardUrl = "{{ route('dashboard') }}";
-        var host = window.location.hostname;
-        var recaptchaAction;
-        if (host === "localhost" || host === "127.0.0.1") {
-            recaptchaAction = "{{ 'login' }}";
-        } else {
-            recaptchaAction = "{{ route('login') }}";
-        }
+        var recaptchaAction = "{{ 'login' }}";
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     @vite('resources/assets/frontend/js/login-page.js')
