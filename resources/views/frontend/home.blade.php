@@ -35,8 +35,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="hero-img wow fadeInUp" data-wow-delay=".5s" style="position: relative;bottom: -50px;">
-                        <img src="{{ asset('frontend/img/hero/mobile-img.webp') }}" alt="" />
-                        {{-- <img src="https://www.realvalidito.com/wp-content/uploads/2024/05/mobile-img.webp" alt="" /> --}}
+                        <img loading="lazy" src="{{ asset('frontend/img/hero/mobile-img.png') }}" alt="" />
                     </div>
                 </div>
             </div>
