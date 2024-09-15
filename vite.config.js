@@ -19,6 +19,7 @@ function GetFilesArray(query) {
 const pageJsFiles = GetFilesArray('resources/assets/js/*.js');
 
 // Frontend JS Files
+const frontendWowJs = GetFilesArray('resources/assets/frontend/js/wow/*.js');
 const frontendJsFiles = GetFilesArray('resources/assets/frontend/js/*.js');
 
 // Processing Vendor JS Files
@@ -48,9 +49,9 @@ export default defineConfig({
     laravel({
       input: [
         'resources/css/app.css',
-        'resources/assets/css/demo.css',
         'resources/js/app.js',
         ...pageJsFiles,
+        ...frontendWowJs,
         ...frontendJsFiles,
         ...vendorJsFiles,
         ...LibsJsFiles,

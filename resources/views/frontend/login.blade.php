@@ -18,12 +18,12 @@
                                             <div class="mt-10 form-group col-md-12">
                                                 <label for="Email">Email</label>
                                                 <input type="email" name="email" id="email" class="form-control">
-                                                <div class="error"></div>
+                                                <div class="login-error"></div>
                                             </div>
                                             <div class="mt-10 form-group col-md-12">
                                                 <label for="Password">Password</label>
                                                 <input type="password" name="password" id="password" class="form-control">
-                                                <div class="error"></div>
+                                                <div class="login-error"></div>
                                             </div>
                                             <div class="block mt-4 d-none">
                                                 <label for="remember_me" class="inline-flex items-center">
@@ -60,6 +60,32 @@
 
             </div>
         </div>
+
+        <!-- Bootstrap Modal for OTP Verification -->
+          <div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="otpModalLabel">OTP Verification</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="otpForm" action="{{ route('otp.verify.store') }}"
+                  data-dashboard-url="{{ route('dashboard') }}">
+                    @csrf
+                    <div class="mb-3">
+                      <label for="otp" class="form-label">Enter OTP</label>
+                      <input type="text" class="form-control" id="otp" name="otp" required>
+                      <div id="otp-error" class="text-danger"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify OTP</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- Bootstrap Modal for OTP Verification -->
+
     </section>
     <!-- ======== feature-section end ======== -->
 @endsection

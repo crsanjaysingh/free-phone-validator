@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-  // Initialize form validation
   $('#registerForm').validate({
       rules: {
           name: {
@@ -21,8 +19,10 @@ $(document).ready(function() {
             required: true,
             minlength: 8,
             maxlength: 255
-          }
-
+          },
+          terms: {
+            required: true
+          },
       },
       messages: {
           name: {
@@ -45,87 +45,68 @@ $(document).ready(function() {
               maxlength: "Password confirmation cannot exceed 255 characters."
           }
       },
-      submitHandler: function(form) {
-          // Serialize form data
+      submitHandler: function(form, event) {
+          event.preventDefault();
           var formData = $(form).serialize();
-
-          // Perform AJAX form submission
+          $('#registerButton').prop('disabled', true);
           $.ajax({
               type: 'POST',
-              url: $(form).attr('action'), // Form action URL
+              url: $(form).attr('action'),
               data: formData,
               success: function(response) {
-                  // Remove error messages
                   $('.error').remove();
-                  // Handle successful response
 
-                  // Display a success message
                   $('#form-errors').html(
                       '<div class="success">Your message has been sent successfully!</div>'
                   );
 
-                  // Get the dashboard route from the data attribute
                   var dashboardUrl = $('#registerForm').data('dashboard-url');
-
-                  // Redirect to the dynamically generated dashboard route
                   window.location.href = dashboardUrl;
               },
               error: function(xhr, status, error) {
-                  // Clear previous error messages
                   $('.error').remove();
-
-                  // Check if the response is JSON
-                  if (xhr.responseJSON) {
-                      var response = xhr.responseJSON;
-                      var statusCode = xhr.status;
-                      var errors = response.errors || {};
-
-                      // Handle validation errors (422 Unprocessable Entity)
-                      if (statusCode === 422) {
-                          for (var field in errors) {
-                              if (errors.hasOwnProperty(field)) {
-                                  var errorMessages = errors[field];
-                                  var errorMessage = errorMessages.join(' ');
-                                  $('#' + field).after('<div class="error">' +
-                                      errorMessage + '</div>');
-                              }
-                          }
-                      }
-                      // Handle unauthorized errors (401 Unauthorized)
-                      else if (statusCode === 401) {
-                          $('#form-errors').html(
-                              '<div class="error">Unauthorized access. Please log in.</div>'
-                          );
-                      }
-                      // Handle forbidden errors (403 Forbidden)
-                      else if (statusCode === 403) {
-                          $('#form-errors').html(
-                              '<div class="error">Access forbidden. You do not have permission to perform this action.</div>'
-                          );
-                      }
-                      // Handle not found errors (404 Not Found)
-                      else if (statusCode === 404) {
-                          $('#form-errors').html(
-                              '<div class="error">Resource not found. Please try again.</div>'
-                          );
-                      }
-                      // Handle server errors (500 Internal Server Error)
-                      else if (statusCode === 500) {
-                          $('#form-errors').html(
-                              '<div class="error">An internal server error occurred. Please try again later.</div>'
-                          );
-                      }
-                  } else {
-                      // If response is not JSON, handle it as a generic error
-                      $('#form-errors').html(
-                          '<div class="error">An unexpected error occurred. Please try again.</div>'
-                      );
-                  }
-              }
+                  handleAjaxErrors(xhr, '#form-errors');
+              },
+              complete: function() {
+                  $('#registerButton').prop('disabled', false);
+              },
           });
-
-          // Prevent the default form submission
           return false;
       }
   });
 });
+
+    function handleAjaxErrors(xhr, errorDivClass='') {
+      errorDivClass = errorDivClass !='' ?errorDivClass:"#form-errors";
+      if (xhr.responseJSON) {
+          var response = xhr.responseJSON;
+          var statusCode = xhr.status;
+          var errors = response.errors || {};
+          if (statusCode === 422) {
+                if(response.status=='error'){
+                    $(errorDivClass).html('<div class="error">'+response.message+'</div>');
+                }else{
+                  for (var field in errors) {
+                    if (errors.hasOwnProperty(field)) {
+                      var errorMessages = errors[field];
+                      var errorMessage = errorMessages.join(' ');
+                      $('#' + field).after('<div class="error">' +
+                          errorMessage + '</div>');
+                    }
+                  }
+                }
+          } else if (statusCode === 401) {
+                $(errorDivClass).html('<div class="error">Unauthorized access. Please log in.</div>');
+          } else if (statusCode === 403) {
+                $(errorDivClass).html('<div class="error">Access forbidden. You do not have permission.</div>');
+          } else if (statusCode === 404) {
+                $(errorDivClass).html('<div class="error">Resource not found.</div>');
+          } else if (statusCode === 500) {
+                $(errorDivClass).html('<div class="error">Server error. Try again later.</div>');
+          }else if(statusCode === 419){
+                $(errorDivClass).html('<div class="error">'+response.message+', Please relaod the page</div>');
+          }
+      } else {
+          $(errorDivClass).html('<div class="error">An unexpected error occurred.</div>');
+      }
+    }

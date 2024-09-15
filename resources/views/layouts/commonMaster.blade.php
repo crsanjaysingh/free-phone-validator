@@ -10,9 +10,9 @@
 
     <title>@yield('title') | Knot Networks </title>
     <meta name="description"
-        content="{{ config('variables.templateDescription') ? config('variables.templateDescription') : '' }}" />
+        content="Knot Networks" />
     <meta name="keywords"
-        content="{{ config('variables.templateKeyword') ? config('variables.templateKeyword') : '' }}">
+        content="Knot Networks">
     <!-- laravel CRUD token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Canonical SEO -->

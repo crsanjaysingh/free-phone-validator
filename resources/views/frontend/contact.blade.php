@@ -44,11 +44,13 @@
                                                 <textarea name="contactDescription" id="contactDescription" class="form-control" cols="30" rows="10"></textarea>
                                                 <div class="error"></div>
                                             </div>
-                                            <div class="mt-2 mt-10 form-group col-md-12">
+                                            <div class="mt-10 form-group col-md-12">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                                 <div id="form-errors" class="error-container"></div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"
+                                            value="">
                                     </form>
                                 </div>
                             </div>
@@ -59,7 +61,6 @@
             </div>
         </div>
     </section>
-    <!-- ======== feature-section end ======== -->
 @endsection
 @push('styles')
     {{-- @vite('resources/assets/frontend/css/contact-page.css') --}}
@@ -67,4 +68,10 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     @vite('resources/assets/frontend/js/contact-page.js')
+
+    <script>
+        var recaptchaAction = "{{ 'contact' }}";
+    </script>
+    <!-- Include the reCAPTCHA v3 script -->
+    <x-reCAPTCHA />
 @endpush

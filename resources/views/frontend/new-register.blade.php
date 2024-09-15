@@ -3,46 +3,18 @@
 @section('title', 'Register Basic - Pages')
 
 @section('page-style')
-    @vite(['resources/assets/vendor/scss/pages/page-auth.scss'])
-    <!-- Add the custom CSS here -->
-    <style>
-        body {
-            background-image: url({{ asset('assets/img/3.jpg') }});
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .div-container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .app-brand {
-            display: flex;
-            justify-content: center;
-            /* Center horizontally */
-            align-items: center;
-            /* Center vertically (if needed) */
-        }
-
-        .app-brand-link {
-            display: flex;
-            justify-content: center;
-            /* Center horizontally */
-        }
-
-        .app-brand img {
-            display: block;
-            max-width: 100%;
-            /* Ensure the image is responsive */
-            height: auto;
-            /* Maintain aspect ratio */
-        }
-    </style>
+<!-- Add the custom CSS here -->
+<style>
+body {
+    background-image: url({{ asset('assets/img/3.jpg') }});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+</style>
+@vite(['resources/assets/vendor/scss/pages/page-auth.scss'])
+@vite('resources/assets/frontend/css/login-page.css')
 @endsection
 
 
@@ -63,47 +35,52 @@
                         <h4 class="mb-1">Adventure starts here 🚀</h4>
                         <p class="mb-5">Make your app management easy and fun!</p>
 
-                        <form id="formAuthentication" class="mb-5" action="{{ url('/') }}" method="GET">
-                            <div class="mb-5 form-floating form-floating-outline">
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Enter your username" autofocus>
-                                <label for="username">Username</label>
+                        <form id="registerForm" action="{{ route('register') }}"
+                        data-dashboard-url="{{ route('login') }}" class="mb-5">
+                            @csrf
+                            <div class="mt-10 form-group col-md-12">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" class="form-control">
+                                <div class="error"></div>
                             </div>
-                            <div class="mb-5 form-floating form-floating-outline">
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Enter your email">
-                                <label for="email">Email</label>
+                            <div class="mt-1 form-group col-md-12">
+                              <label for="Email">Email</label>
+                              <input type="email" name="email" id="email" class="form-control">
+                              <div class="error"></div>
+                           </div>
+                            <div class="mt-1 form-group col-md-12">
+                                <label for="Password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control">
+                                <div class="error"></div>
                             </div>
-                            <div class="mb-5 form-password-toggle">
-                                <div class="input-group input-group-merge">
-                                    <div class="form-floating form-floating-outline">
-                                        <input type="password" id="password" class="form-control" name="password"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                            aria-describedby="password" />
-                                        <label for="password">Password</label>
-                                    </div>
-                                    <span class="cursor-pointer input-group-text"><i
-                                            class="ri-eye-off-line ri-20px"></i></span>
-                                </div>
+                            <div class="mt-1 form-group col-md-12">
+                                <label for="password_confirmation">Confirm Password</label>
+                                <input type="password" name="password_confirmation"
+                                    id="password_confirmation" class="form-control">
+                                <div class="error"></div>
                             </div>
-
                             <div class="py-2 mb-5">
                                 <div class="mb-0 form-check">
-                                    <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms">
-                                    <label class="form-check-label" for="terms-conditions">
+                                    <label class="form-check-label" for="terms">
                                         I agree to
                                         <a href="javascript:void(0);">privacy policy & terms</a>
                                     </label>
+                                    <input class="form-check-input" type="checkbox" id="terms" name="terms">
                                 </div>
                             </div>
-                            <button class="mb-5 btn btn-primary d-grid w-100">
+                            <div id="form-errors" class="error-container"></div>
+                            <button class="mb-5 btn btn-primary d-grid w-100" id="registerButton">
                                 Sign up
                             </button>
+                            <div id="form-errors" class="error-container"></div>
+
+                            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"
+                                value="">
                         </form>
 
                         <p class="mb-5 text-center">
                             <span>Already have an account?</span>
-                            <a href="{{ url('auth/login-basic') }}">
+                            <a href="{{ url('login') }}">
                                 <span>Sign in instead</span>
                             </a>
                         </p>
@@ -113,10 +90,11 @@
         </div>
     </div>
 @endsection
-@push('page-script')
-    <script>
-        var dashboardUrl = "{{ route('dashboard') }}";
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
-    @vite('resources/assets/frontend/js/register-page.js')
+@push('scripts')
+<script>
+    var dashboardUrl = "{{ route('dashboard') }}";
+    var recaptchaAction = "{{ 'register' }}";
+</script>
+@vite('resources/assets/frontend/js/register-page.js')
+<x-reCAPTCHA />
 @endpush

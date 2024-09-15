@@ -1,45 +1,50 @@
 <?php
+
 namespace App\Services;
+
+use GuzzleHttp\Client;
 
 class PhoneValidationService
 {
-    protected $apiKey;
-    protected $baseUrl = 'https://www.ipqualityscore.com/api/json/phone';
+  protected $apiKey;
+  protected $baseUrl = 'https://www.ipqualityscore.com/api/json/phone';
+  protected $client;
 
-    public function __construct()
-    {
-        $this->apiKey = config('services.ipqs.api_key');
+  public function __construct(Client $client)
+  {
+    $this->apiKey = config('services.ipqs.api_key');
+    $this->client = $client;
+  }
+
+  public function validatePhone($phone, $countries = ['US', 'CA'])
+  {
+    $parameters = [
+      'country' => $countries
+    ];
+
+    try {
+
+      $url = sprintf(
+        '%s/%s/%s',
+        $this->baseUrl,
+        $this->apiKey,
+        $phone
+      );
+
+      $response = $this->client->get($url, [
+        'query' => $parameters,
+        'timeout' => 5,
+      ]);
+
+      if ($response->getStatusCode() === 200) {
+        return json_decode($response->getBody()->getContents(), true);
+      }
+    } catch (\Exception $e) {
+      return [
+        'error' => true,
+        'message' => $e->getMessage()
+      ];
     }
-
-    public function validatePhone($phone, $countries = ['US', 'CA'])
-    {
-        $parameters = [
-            'country' => $countries
-        ];
-
-        $formattedParameters = http_build_query($parameters);
-
-        $url = sprintf(
-            '%s/%s/%s?%s',
-            $this->baseUrl,
-            $this->apiKey,
-            $phone,
-            $formattedParameters
-        );
-
-        $timeout = 5;
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
-
-        $json = curl_exec($curl);
-        curl_close($curl);
-
-        $result = json_decode($json, true);
-
-        return $result;
-    }
+    return null;
+  }
 }

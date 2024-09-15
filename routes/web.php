@@ -4,19 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PhoneValidationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\OtpController;
 
+Route::post('/subscribe', [NewsletterController::class, 'store'])->name('newsletter.subscribe');
 Route::get('/', function () {
   return view('frontend.home', ['title' => 'Home Page']);
-})->name('home');
-
-Route::get('/login-new', function () {
-  return view('frontend.new-login', ['title' => 'Home Page']);
-})->name('login.new');
-
-Route::get('/register-new', function () {
-  return view('frontend.new-register', ['title' => 'Home Page']);
-})->name('register.new');
-
+})->name(name: 'home');
+Route::get('otp-verify', action: [OtpController::class, 'show'])->name('otp.verify');
+Route::post('otp-verify', action: [OtpController::class, 'verify'])->name('otp.verify.store');
 Route::get('/about', function () {
   return view('frontend.about');
 })->name('about');
@@ -40,11 +36,11 @@ Route::get('/faqs', function () {
   return view('frontend.faqs');
 })->name('faqs');
 // 1440 minute for a day
-Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:10,1440')->name('validate.phone');
+Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:20,1440')->name('validate.phone');
 
 Route::get('/dashboard', function () {
   return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(middleware: ['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

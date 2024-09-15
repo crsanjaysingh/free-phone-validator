@@ -23,16 +23,14 @@ $(document).ready(function() {
                 valueNotEquals: "Please choose a valid subject."
             }
         },
-        submitHandler: function(form) {
+        submitHandler: function(form, event) {
+            event.preventDefault();
             var formData = $(form).serialize();
-
+            $('#loginButton').prop('disabled', true);
             $.ajax({
                 type: 'POST',
                 url: $(form).attr('action'),
                 data: formData,
-                beforeSend: function() {
-                    showPreloader();
-                },
                 success: function(response) {
                     $('.error').remove();
                     $('#form-errors').html(
@@ -49,8 +47,7 @@ $(document).ready(function() {
                     handleAjaxErrors(xhr, '#form-errors');
                 },
                 complete: function() {
-                  hidePreloader();
-                  $submitButton.prop('disabled', false);
+                  $('#loginButton').prop('disabled', false);
                 }
             });
             return false;
@@ -72,8 +69,8 @@ $(document).ready(function() {
               maxlength: "OTP must be 6 digits."
           }
       },
-      submitHandler: function(otpForm) {
-
+      submitHandler: function(otpForm,event) {
+          event.preventDefault();
           var formData = $(otpForm).serialize();
 
           $.ajax({
@@ -81,6 +78,7 @@ $(document).ready(function() {
               url: $(otpForm).attr('action'),
               data: formData,
               success: function(response) {
+                  console.log(response);
                   if(response.status == "success"){
                       $('#otp-error').html('<div class="success">'+response.message+'</div>');
                       var dashboardUrl = $('#otpForm').data('dashboard-url');
@@ -98,6 +96,7 @@ $(document).ready(function() {
 
     function handleAjaxErrors(xhr, errorDivClass='') {
       errorDivClass = errorDivClass !='' ?errorDivClass:"#form-errors";
+
       if (xhr.responseJSON) {
           var response = xhr.responseJSON;
           var statusCode = xhr.status;
@@ -105,6 +104,7 @@ $(document).ready(function() {
           if (statusCode === 422) {
                 if(response.status=='error'){
                     $(errorDivClass).html('<div class="error">'+response.message+'</div>');
+
                 }else{
                   for (var field in errors) {
                     if (errors.hasOwnProperty(field)) {

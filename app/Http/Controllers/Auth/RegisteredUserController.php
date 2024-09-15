@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Services\RecaptchaService;
+use Illuminate\Http\JsonResponse;
 
 class RegisteredUserController extends Controller
 {
@@ -22,7 +23,7 @@ class RegisteredUserController extends Controller
   {
     // return view('auth.register');
 
-    return view('frontend.register', ['title' => 'Register']);
+    return view('frontend.new-register', ['title' => 'Register']);
   }
 
   /**
@@ -30,7 +31,7 @@ class RegisteredUserController extends Controller
    *
    * @throws \Illuminate\Validation\ValidationException
    */
-  public function store(Request $request, RecaptchaService $recaptchaService): RedirectResponse
+  public function store(Request $request, RecaptchaService $recaptchaService): JsonResponse
   {
     $request->validate([
       'name' => ['required', 'string', 'max:255'],
@@ -39,7 +40,10 @@ class RegisteredUserController extends Controller
     ]);
 
     if (!$recaptchaService->verify($request)) {
-      return back()->withErrors(['g-recaptcha-response' => 'Invalid reCAPTCHA response.']);
+      return response()->json([
+        'status' => 'error',
+        'message' => $request->input('g-recaptcha-response') ? "please wait, the page is loading" : "Invalid reCAPTCHA response."
+      ], 422);
     }
 
     $user = User::create([
@@ -48,11 +52,8 @@ class RegisteredUserController extends Controller
       'password' => Hash::make($request->password),
     ]);
 
-    event(new Registered($user));
-
+    event(new Registered(user: $user));
     Auth::login($user);
-
-    // return redirect(route('dashboard', absolute: false));
     return redirect()->route('verification.notice');
   }
 }

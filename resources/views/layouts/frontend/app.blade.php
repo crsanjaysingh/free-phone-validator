@@ -15,8 +15,6 @@
     <!-- Place favicon.ico in the root directory -->
 
     <!-- ======== CSS here ======== -->
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" /> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}" /> --}}
 
     @vite('resources/assets/frontend/css/bootstrap.min.css')
     @vite('resources/assets/frontend/css/frontend-main.css')
@@ -58,26 +56,12 @@
     <!-- ======== JS here ======== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     @vite('resources/assets/frontend/js/bootstrap.bundle.min.js')
+    @vite('resources/assets/frontend/js/wow/wow.bundle.min.js')
+    @vite('resources/assets/frontend/js/wow/wow.min.js')
     @vite('resources/assets/frontend/js/frontend-main.js')
-    @vite('resources/assets/frontend/js/wow.bundle.min.js')
+    @vite('resources/assets/frontend/js/app.js')
     <!-- Page Specific JS -->
     @stack('scripts')
-    <script>
-        // Show preloader
-        function showPreloader() {
-            $('.preloader').show(); // Ensure display is set to block/flex
-        }
-
-        // Hide preloader
-        function hidePreloader() {
-            $('.preloader').hide(); // Hides the preloader
-        }
-
-        // Added Select Validation
-        $.validator.addMethod("valueNotEquals", function(value, element, arg) {
-            return value !== arg;
-        }, "Value must not equal arg.");
-    </script>
 </body>
 
 </html>

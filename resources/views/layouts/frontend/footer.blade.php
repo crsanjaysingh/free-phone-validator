@@ -13,11 +13,17 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-5">
-                    <form action="#" class="subscribe-form">
-                        <input type="email" name="subs-email" id="subs-email" placeholder="Your Email" />
+                    <form id="subscribeForm" action="{{ route('newsletter.subscribe') }}" method="POST"
+                        class="subscribe-form">
+                        @csrf
+                        <input type="email" name="subscribe-email" id="subscribe-email" placeholder="Enter your email" required />
                         <button type="submit" class="main-btn btn-hover">
                             Subscribe
                         </button>
+                        <div id="form-errors" class="error-container"></div>
+                        @if (session('success'))
+                            <p class="text-white">{{ session('success') }}</p>
+                        @endif
                     </form>
                 </div>
             </div>
