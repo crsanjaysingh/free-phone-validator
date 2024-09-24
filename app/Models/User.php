@@ -2,14 +2,29 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Event;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-  use HasFactory, Notifiable;
+  use HasFactory, Notifiable, HasRoles;
+
+
+  protected static function booted()
+  {
+    static::created(function ($user) {
+      // Check if the user has no roles and assign the default role
+      if (!$user->hasAnyRole(Role::all())) {
+        $user->assignRole('user'); // Assign the 'user' role as default
+      }
+    });
+  }
 
   /**
    * The attributes that are mass assignable.
@@ -18,7 +33,10 @@ class User extends Authenticatable implements MustVerifyEmail
    */
   protected $fillable = [
     'name',
+    'last_name',
     'email',
+    'phone_number',
+    'profile_image',
     'password',
     'otp',
     'otp_expires_at'
@@ -47,5 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail
       'email_verified_at' => 'datetime',
       'password' => 'hashed',
     ];
+  }
+  public function wallet()
+  {
+    return $this->hasOne(Wallet::class);
   }
 }

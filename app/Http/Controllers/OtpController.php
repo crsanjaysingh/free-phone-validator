@@ -37,18 +37,22 @@ class OtpController extends Controller
         'otp' => null,
         'otp_expires_at' => null,
       ]);
-
+      if ($user && $user->hasRole('admin')) {
+        $dashboard = 'admin.dashboard';
+      } else {
+        $dashboard = 'user.dashboard';
+      }
       return response()->json([
         'status' => 'success',
         'message' => 'OTP verification is done!.',
-        'route' => route('dashboard')
+        'route' => route($dashboard)
       ], 200);
     }
 
     return response()->json([
       'status' => 'error',
       'message' => 'Invalid OTP or OTP expired.',
-      'route' => route('otp.verify')
+      'route' => route(name: 'otp.verify')
     ], 422);
   }
 }

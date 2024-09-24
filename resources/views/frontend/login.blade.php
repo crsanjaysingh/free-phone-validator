@@ -40,7 +40,7 @@
                                                 </a>
                                             </div>
                                             <div class="mt-2 form-group col-md-6">
-                                                <button type="submit" class="btn btn-primary">Login</button>
+                                                <button type="submit" class="btn btn-primary" disabled>Login</button>
                                                 <div id="form-errors" class="error-container"></div>
                                             </div>
                                             <div class="mt-2 form-group col-md-6" style="text-align: right">

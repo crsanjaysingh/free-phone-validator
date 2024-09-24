@@ -18,7 +18,7 @@
     <!-- Canonical SEO -->
     <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.png') }}" />
 
 
     <!-- Include Styles -->
@@ -27,6 +27,16 @@
     <!-- Include Scripts for customizer, helper, analytics, config -->
     @include('layouts/sections/scriptsIncludes')
     <!-- Page Specific CSS -->
+    @stack('styles')
+    <style>
+      a.btn.btn-sm.btn-primary {
+          color: #FFF;
+      }
+      .right_area {
+          margin-right: 26px;
+          margin-top: 15px;
+      }
+    </style>
 </head>
 
 <body>
@@ -39,7 +49,40 @@
     <!-- Include Scripts -->
     @include('layouts/sections/scripts')
     @stack('scripts')
+    <script>
 
+    // Toastr options
+    // toastr.options = {
+    //   "closeButton": true,
+    //   "debug": false,
+    //   "newestOnTop": false,
+    //   "progressBar": true,
+    //   "positionClass": "toast-top-right",
+    //   "preventDuplicates": false,
+    //   "onclick": null,
+    //   "showDuration": "300",
+    //   "hideDuration": "1000",
+    //   "timeOut": "5000",
+    //   "extendedTimeOut": "1000",
+    //   "showEasing": "swing",
+    //   "hideEasing": "linear",
+    //   "showMethod": "fadeIn",
+    //   "hideMethod": "fadeOut"
+    // };
+
+
+      $.validator.addMethod("filesize", function(value, element, param) {
+          return this.optional(element) || (element.files[0].size <= param);
+      }, "File size must be less than 800KB.");
+
+      $.validator.addMethod("select", function(value, element) {
+          return value !== "";
+      }, "Please select a country.");
+
+      setTimeout(function() {
+          $('.alert').fadeOut('slow');
+      }, 3000);
+    </script>
 </body>
 
 </html>

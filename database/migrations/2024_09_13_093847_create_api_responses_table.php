@@ -13,7 +13,7 @@ return new class extends Migration
   {
     Schema::create('api_responses', function (Blueprint $table) {
       $table->id();
-      $table->string('lookup_type');
+      $table->string('lookup_type')->default('phone');
       $table->string('lookup_for');
       $table->decimal('fraud_score', 5, 2);
       $table->string('status');

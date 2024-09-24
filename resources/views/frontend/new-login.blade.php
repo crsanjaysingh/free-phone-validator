@@ -61,7 +61,7 @@
                                 </a>
                             </div>
                             <div class="mb-5">
-                                <button class="btn btn-primary d-grid w-100" id="loginButton" type="submit">login</button>
+                                <button class="btn btn-primary d-grid w-100" id="loginButton" type="submit" disabled>login</button>
                             </div>
                             <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"
                             value="">

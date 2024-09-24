@@ -19,3 +19,9 @@
 
 <!-- Page Styles -->
 @yield('page-style')
+<style>
+.error {
+    color: red;
+    padding-top: 2px;
+}
+</style>

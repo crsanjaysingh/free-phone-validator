@@ -41,6 +41,7 @@ Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone
 Route::get('/dashboard', function () {
   return view('dashboard');
 })->middleware(middleware: ['auth', 'verified'])->name('dashboard');
+// right_user
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -49,4 +50,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/user.php';
+require __DIR__ . '/admin.php';
 require __DIR__ . '/theme.php';

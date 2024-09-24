@@ -6,17 +6,17 @@
             <span class="app-brand-logo demo me-1">
                 @include('_partials.macros', ['height' => 20])
             </span>
-            <span class="app-brand-text demo menu-text fw-semibold ms-2">{{ config('variables.templateName') }}</span>
+            {{-- <span class="app-brand-text demo menu-text fw-semibold ms-2">{{ config('variables.templateName') }}</span> --}}
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
-            <i class="menu-toggle-icon d-xl-block align-middle"></i>
+            <i class="align-middle menu-toggle-icon d-xl-block"></i>
         </a>
     </div>
 
     <div class="menu-inner-shadow"></div>
 
-    <ul class="menu-inner py-1">
+    <ul class="py-1 menu-inner">
         @foreach ($menuData[0]->menu as $menu)
             {{-- adding active and open class if child is active --}}
 

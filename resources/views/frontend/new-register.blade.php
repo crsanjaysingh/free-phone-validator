@@ -69,7 +69,7 @@ body {
                                 </div>
                             </div>
                             <div id="form-errors" class="error-container"></div>
-                            <button class="mb-5 btn btn-primary d-grid w-100" id="registerButton">
+                            <button class="mb-5 btn btn-primary d-grid w-100" id="registerButton" disabled>
                                 Sign up
                             </button>
                             <div id="form-errors" class="error-container"></div>

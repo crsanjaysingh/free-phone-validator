@@ -58,9 +58,28 @@ class AuthenticatedSessionController extends Controller
     $credentials = $request->only('email', 'password');
     if (Auth::attempt($credentials, $request->boolean('remember'))) {
 
-      $otp = rand(100000, 999999);
+
       $user = Auth::user();
 
+      if ($user->is_blocked) {
+        Auth::logout();
+
+        return response()->json([
+          'status' => 'error',
+          'message' => 'Your account has been blocked. Please contact support.'
+        ], status: 422);
+      }
+
+      if ($user->is_deleted) {
+        Auth::logout();
+
+        return response()->json([
+          'status' => 'error',
+          'message' => 'Your account has been deleted. Please contact support.'
+        ], status: 422);
+      }
+
+      $otp = rand(100000, 999999);
       $user->update([
         'otp' => $otp,
         'otp_expires_at' => now()->addMinutes(10),

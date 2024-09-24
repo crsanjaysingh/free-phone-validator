@@ -17,6 +17,7 @@ function GetFilesArray(query) {
  */
 // Page JS Files
 const pageJsFiles = GetFilesArray('resources/assets/js/*.js');
+const adminPageJsFiles = GetFilesArray('resources/assets/js/admin/*.js');
 
 // Frontend JS Files
 const frontendWowJs = GetFilesArray('resources/assets/frontend/js/wow/*.js');
@@ -52,6 +53,7 @@ export default defineConfig({
         'resources/assets/css/demo.css',
         'resources/js/app.js',
         ...pageJsFiles,
+        ...adminPageJsFiles,
         ...frontendWowJs,
         ...frontendJsFiles,
         ...vendorJsFiles,
