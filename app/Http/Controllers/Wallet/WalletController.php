@@ -86,9 +86,6 @@ class WalletController extends Controller
 
   public function showWalletHistory(Request $request, $userId = null)
   {
-    if (!$userId && Auth::user()->hasRole("user")) {
-      $userId = Auth::id();
-    }
     if ($request->ajax()) {
       if ($userId) {
         $user = User::findOrFail($userId);
@@ -125,6 +122,6 @@ class WalletController extends Controller
       $wallet = $user->wallet;
     }
 
-    return view('user.wallet.history', compact(var_name: 'wallet'));
+    return view('admin.wallet.history', compact(var_name: 'wallet'));
   }
 }

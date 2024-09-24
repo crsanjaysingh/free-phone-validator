@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PlanController;
-use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\LookupController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Wallet\WalletController;
-use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 Route::group(['middleware' => ['auth', 'verified', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {

@@ -40,8 +40,7 @@ Route::post('/validate-phone', [PhoneValidationController::class, 'validatePhone
 
 Route::get('/dashboard', function () {
   return view('dashboard');
-})->middleware(middleware: ['auth', 'verified'])->name('dashboard');
-// right_user
+})->middleware(middleware: ['auth', 'verified', 'right_user'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
