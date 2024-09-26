@@ -19,9 +19,11 @@ class RedirectIfNotAdmin
     $user = Auth::user();
 
     if ($user && $user->hasRole('admin')) {
-      return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
+      return redirect()->route('admin.dashboard');
+    } else if ($user && $user->hasRole('user')) {
+      return redirect()->route('user.dashboard');
+    } else {
+      return redirect()->route('home');
     }
-
-    return redirect()->route('user.dashboard'); // Redirect to user dashboard
   }
 }

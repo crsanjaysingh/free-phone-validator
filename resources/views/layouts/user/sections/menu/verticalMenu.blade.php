@@ -17,40 +17,45 @@
   <div class="menu-inner-shadow"></div>
   <div style="min-height: 100vh">
     <ul class="py-1 menu-inner ps ps--active-y">
-          <li class="menu-item open">
-            <a href="{{ route("user.dashboard") }}" class="menu-link open">
+          <li class="menu-item">
+            <a href="{{ route('user.dashboard') }}" class="menu-link" style="{{ Route::is('user.dashboard') ? 'background-color: #2e263d0f;' : '' }}">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div>Dashboards</div>
             </a>
         </li>
-        <li class="menu-item ">
+        <li class="menu-item {{ Route::is('user.lookup.index') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
               <div>Recent Lookups</div>
           </a>
           <ul class="menu-sub">
-              <li class="menu-item ">
-                <a href="{{ route('user.lookup.index') }}" class="menu-link">
-                    <div>Phone Lookups</div>
-                </a>
+              <li class="menu-item">
+                  <a href="{{ route('user.lookup.index') }}" class="menu-link">
+                      <div>Phone Lookups</div>
+                  </a>
               </li>
           </ul>
-        </li>
-        <li class="menu-item ">
+      </li>
+        <li class="menu-item {{ Route::is('user.plans.index') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
-              <div>Plans</div>
+              <div>Subscriptions</div>
           </a>
           <ul class="menu-sub">
               <li class="menu-item ">
                 <a href="{{ route("user.plans.index") }}" class="menu-link">
-                    <div>Phone Plans</div>
+                    <div>My Plan</div>
+                </a>
+              </li>
+              <li class="menu-item ">
+                <a href="{{ route("pricing") }}" class="menu-link">
+                    <div>Check Plans</div>
                 </a>
               </li>
           </ul>
         </li>
 
-        <li class="menu-item ">
+        <li class="menu-item {{ Route::is('user.wallet.history') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
               <div>Transactions</div>

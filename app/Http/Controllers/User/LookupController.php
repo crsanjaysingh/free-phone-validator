@@ -26,7 +26,7 @@ class LookupController extends Controller
           return '<button id="lookup_id_' . $row->id . '" class="btn btn-sm btn-info show-lookup-details" data-lookup-id="' . $row->id . '">Details</button>';
         })
         ->editColumn('created_at', function ($lookup) {
-          return $lookup->created_at->format('m-d-Y H:i:s');
+          return timeAgo($lookup->created_at->format('m-d-Y H:i:s'));
         })
         ->addColumn('user', function ($lookup) {
           return $lookup->user->name ?? 'N/A';

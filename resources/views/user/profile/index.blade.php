@@ -18,15 +18,14 @@
       <div class="pt-0 card-body">
         <form id="userProfileForm" method="POST" action="{{ route("user.profile.store") }}"  enctype="multipart/form-data">
             @csrf
-            <div class="gap-6 d-flex align-items-start align-items-sm-center">
+            <div class="gap-6 mt-5 d-flex align-items-start align-items-sm-center">
               @if (!empty($user->profile_image))
                   @php
-                      $imageUrl = asset('storage/' . $user->profile_image);
+                     $imageUrl = asset('storage/' . $user->profile_image);
                   @endphp
-                  <img src="{{ $imageUrl }}" alt="user-avatar" class="rounded d-block w-px-100 h-px-100" id="uploadedAvatar" />
-              @else
-                  <img src="{{ asset('assets/img/avatars/1.png') }}" alt="default-avatar" class="rounded d-block w-px-100 h-px-100" id="uploadedAvatar" />
               @endif
+
+              <img src="{{ $imageUrl??asset('assets/img/avatars/1.png') }}" alt="user-avatar" class="rounded d-block w-px-100 h-px-100" id="uploadedAvatar" />
 
               <div class="button-wrapper">
                 <label for="upload" class="mb-4 btn btn-sm btn-primary me-3" tabindex="0">

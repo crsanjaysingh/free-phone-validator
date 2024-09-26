@@ -18,30 +18,34 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="page-scroll" href="{{ route('home') }}">Home</a>
+                                    <a class="navbar" href="{{ route('home') }}">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="page-scroll" href="javascript:void(0)">Tracking Numbers</a>
-                                </li>
-                                @if (0)
+                                {{-- <li class="nav-item">
+                                    <a class="page-scroll" href="#guest-validator-section">Tracking Numbers</a>
+                                </li> --}}
+                                @if (Route::is('home'))
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#about">API</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0)">Pricing</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#why">FAQ</a>
+                                        <a class="page-scroll" href="#guest-validator-section">Tracking Numbers</a>
                                     </li>
                                 @endif
-                                <li class="nav-item">
-                                    <a href="{{ route('login') }}" id="login-nav"
-                                        data-login="{{ route('login') }}">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('register') }}" id="register-nav"
-                                        data-register="{{ route('register') }}">Register</a>
-                                </li>
+                                @if (auth()->check())
+                                    <li class="nav-item">
+                                        <a  href="#">API</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="navbar" href="{{ route("pricing") }}">Pricing</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="navbar" href="{{ route("dashboard") }}">Dashboard</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a href="{{ route('login') }}" id="login-nav" data-login="{{ route('login') }}">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('register') }}" id="register-nav" data-register="{{ route('register') }}">Register</a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                         <!-- navbar collapse -->

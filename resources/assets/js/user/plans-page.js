@@ -1,41 +1,49 @@
 $(document).ready(function () {
-  var ajaxUrl = $('#plansTable').data('url');
 
-  $('#plansTable').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: {
-      url: ajaxUrl,
-      type: 'GET'
-    },
-    columns: [
-      { data: 'id', name: 'id' },
-      { data: 'name', name: 'name' },
-      {
-        data: 'plan_tags',
-        name: 'plan_tags',
-        render: function (data, type, row) {
-          return (data == '' || data == null) ? '<span class="badge rounded-pill bg-dark">N/A</span>' : '<span class="badge rounded-pill bg-dark">' + data + '</span>';
-        }
-      },
-      {
-        data: 'is_free',
-        name: 'is_free',
-        render: function (data, type, row) {
-          return data == 1 ? '<span class="badge rounded-pill bg-success">Yes</span>' : '<span class="badge rounded-pill bg-danger">No</span>';
-        }
-      },
-      { data: 'plan_cost', name: 'plan_cost' },
-      { data: 'plan_type', name: 'plan_type' },
-      { data: 'lookup_limit', name: 'lookup_limit' },
-      {
-        data: 'status',
-        name: 'status',
-        render: function (data, type, row) {
-          return data == "Active" ? '<span class="badge rounded-pill bg-success">Active</span>' : '<span class="badge rounded-pill bg-danger">Inactive</span>';
-        }
-      },
-      { data: 'action', name: 'action', orderable: false, searchable: false }
-    ]
+  $('.pause-subscription').on('click', function () {
+    var subscriptionId = $(this).data('id');
+    var planStatusROute = $("#planStatusROute").val();
+    var status = 2
+    handleAjax(subscriptionId, status, planStatusROute)
   });
+
+  $('.continue-subscription').on('click', function () {
+    var subscriptionId = $(this).data('id');
+    var planStatusROute = $("#planStatusROute").val();
+    var status = 1
+    handleAjax(subscriptionId, status, planStatusROute)
+  });
+
+  $('.cancel-subscription').on('click', function () {
+    var subscriptionId = $(this).data('id');
+    var planStatusROute = $("#planStatusROute").val();
+    var status = 3
+    handleAjax(subscriptionId, status, planStatusROute)
+  });
+
+  function handleAjax(subscriptionId, status, route) {
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+      url: route,
+      type: 'POST',
+      data: {
+        subscriptionId: subscriptionId,
+        subscriptionStatus: status,
+        _token: token
+      },
+      success: function (response) {
+        if (response.status == 'success') {
+          setTimeout(() => {
+            location.reload();
+          }, 300);
+          toastr.success(response.message, 'Success');
+        } else {
+          toastr.error(response.message, 'Error');
+        }
+      },
+      error: function (xhr, status, error) {
+        toastr.error('An error occurred while updating subscription status.', 'Error');
+      }
+    });
+  }
 });

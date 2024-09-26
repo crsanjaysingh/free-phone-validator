@@ -2,35 +2,66 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
-use App\Models\Plan;
-use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserPlanController extends Controller
 {
   public function index(Request $request)
   {
-    if ($request->ajax()) {
-      $plans = Plan::query();
+    $user = Auth::user();
+    $subscription = Subscription::where("user_id", $user->id)->with('user', 'plan')->first();
+    return view('user.plans.index', ["subscription" => $subscription]);
+  }
 
-      return DataTables::of($plans)
-        ->addColumn('action', function ($plan) {
-          return '
-                    <a href="' . route('user.plans.show', ['plan' => $plan->id]) . '" class="btn btn-sm btn-primary">View Plan</a>
-                    <a href="' . route('user.plans.edit', ['plan' => $plan->id]) . '" class="btn btn-sm btn-info">Upgrade</a>
-                    ';
-        })
-        ->editColumn('plan_cost', function ($plan) {
-          return '$' . number_format($plan->plan_cost, 2);
-        })
-        ->editColumn('status', function ($plan) {
-          return $plan->status ? 'Active' : 'Inactive';
-        })
-        ->rawColumns(['action'])
-        ->make(true);
+  public function planStatus(Request $request)
+  {
+    try {
+      $validator = Validator::make($request->all(), [
+        'subscriptionId' => 'required|integer|max:255',
+        'subscriptionStatus' => 'required|integer|max:255',
+      ]);
+
+      if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 400);
+      }
+
+      $user = Auth::user();
+
+      $subscription = Subscription::where("user_id", $user->id)->where("id", $request->subscriptionId)->first();
+
+      if (!$subscription) {
+        return response()->json(['status' => 'error', 'message' => 'Subscription not found'], 404);
+      }
+      Log::info("Updating status to: " . $request->subscriptionStatus);
+
+      $subscription->status = $request->subscriptionStatus;
+      $subscription->save();
+
+      Log::info("Saved status: " . $subscription->status);
+
+
+      $message = '';
+      if ($request->subscriptionStatus == 1) {
+        $message = 'Subscription is continued';
+      } elseif ($request->subscriptionStatus == 2) {
+        $message = 'Subscription is paused';
+      } elseif ($request->subscriptionStatus == 3) {
+        $message = 'Subscription is cancelled';
+      }
+
+      return response()->json(['status' => 'success', 'message' => $message, 'route' => route("user.plans.index")], 200);
+    } catch (\Exception $e) {
+      dd($e->getMessage());
+      return response()->json([
+        'status' => 'error',
+        'message' => 'An error occurred while processing the request',
+        'error' => $e->getMessage()
+      ], 500);
     }
-
-    return view('user.plans.index');
   }
 }

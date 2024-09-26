@@ -19,9 +19,8 @@ class User extends Authenticatable implements MustVerifyEmail
   protected static function booted()
   {
     static::created(function ($user) {
-      // Check if the user has no roles and assign the default role
       if (!$user->hasAnyRole(Role::all())) {
-        $user->assignRole('user'); // Assign the 'user' role as default
+        $user->assignRole('user');
       }
     });
   }
@@ -69,5 +68,21 @@ class User extends Authenticatable implements MustVerifyEmail
   public function wallet()
   {
     return $this->hasOne(Wallet::class);
+  }
+
+  public function subscription()
+  {
+    return $this->hasOne(Subscription::class);
+  }
+
+  public function subscriptions()
+  {
+    return $this->hasMany(Subscription::class);
+  }
+
+  public function deductWallet($amount)
+  {
+    $this->wallet_balance -= $amount;
+    $this->save();
   }
 }

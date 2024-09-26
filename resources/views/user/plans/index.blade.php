@@ -10,45 +10,37 @@
 @php
 $breadcrumbs = [
   ['label' => 'Dashboard', 'url' => route('user.dashboard'), 'active' => false],
-  ['label' => 'Plans', 'url' => route('user.plans.index'), 'active' => true],
+  ['label' => 'Subscription', 'url' => route('user.plans.index'), 'active' => true],
 ];
 @endphp
 @include('components.admin.breadcrumb', ['title' => 'Dashboard', 'breadcrumbs' => $breadcrumbs, 'styleClass' => 'breadcrumb-style1', 'cardHeader'=>false, 'cardHeaderHeading'=>"Edit Plan"])
 <!-- Breadcrumb Component -->
 <!-- Hoverable Table rows -->
-<div class="card">
-  <div class="row">
-     <div class="col-md-6"><h5 class="card-header">My Plan</h5></div>
-     <div class="col-md-6 text-end">
-         <div class="right_area">
-              <a href="{{ route("admin.plans.create") }}" class="btn btn-sm btn-success">Buy A Plan</a>
-        </div>
-     </div>
+<div class="mt-4 mb-4 text-center shadow-lg card subscription-card">
+  <div class="card-header bg-primary">
+    <h5 class="mb-0 text-white card-title">Subscription Details</h5>
   </div>
-  <div class="container table-responsive text-nowrap">
-    <table id="plansTable" class="table table-hover" data-url="{{ route('user.plans.index') }}">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Tag line</th>
-            <th>Is Free</th>
-            <th>Cost</th>
-            <th>Plan Type</th>
-            <th>Query Limit</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-      </thead>
-      <tbody>
-          <!-- DataTables will populate this via AJAX -->
-      </tbody>
-    </table>
+  <div class="card-body">
+      <div class="pt-5">
+         @include('components.user.subscription-info', ['subscription' => $subscription])
+      </div>
   </div>
 </div>
-<!--/ Hoverable Table rows -->
 @endsection
 @push("styles")
+<style>
+  .subscription-card {
+    border-radius: 10px;
+  }
+  .subscription-card .card-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .subscription-card .card-body h6 {
+    font-weight: bold;
+    color: #555;
+  }
+</style>
   <!-- Toastr CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">

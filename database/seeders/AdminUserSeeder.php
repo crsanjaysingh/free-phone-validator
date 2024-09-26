@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
     $user = User::firstOrCreate(
       ['email' => 'no.reply@knotnetworks.com'],
       [
-        'name' => 'Admin User',
+        'name' => 'Admin',
         'password' => Hash::make('Admin@knotnetworks^&&&*#$%'),
       ]
     );

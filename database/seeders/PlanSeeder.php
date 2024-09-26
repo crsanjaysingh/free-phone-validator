@@ -18,7 +18,7 @@ class PlanSeeder extends Seeder
         'name' => 'Basic Plan',
         'plan_tags' => 'starter,individual',
         'plan_cost' => 0.00,
-        'features' => json_encode(['feature_1' => 'Access to basic features', 'feature_2' => 'Email support']),
+        'features' => json_encode(['feature_0' => 'Free Forever', 'feature_1' => 'Access to basic features', 'feature_2' => 'Email support']),
         'plan_type' => 'monthly',
         'lookup_limit' => 600,
         'is_free' => true,

@@ -11,12 +11,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use App\Services\WalletService;
 use Yajra\DataTables\Facades\DataTables;
 
 
 class WalletController extends Controller
 {
+  protected $walletService;
+
+  public function __construct(WalletService $walletService)
+  {
+    $this->walletService = $walletService;
+  }
   public function addFunds(Request $request)
   {
     $request->validate([
@@ -25,30 +31,12 @@ class WalletController extends Controller
       'memo' => 'required|string|max:255',
     ]);
 
-    try {
-      DB::beginTransaction();
+    $result = $this->walletService->addFunds($request->user_id, $request->amount, $request->memo);
 
-      $userId = $request->user_id;
-      $user = User::findOrFail($userId);
-
-      $wallet = $user->wallet ?? Wallet::create(['user_id' => $user->id]);
-      $wallet->balance += $request->amount;
-      $wallet->save();
-
-      WalletTransaction::create([
-        'wallet_id' => $wallet->id,
-        'amount' => $request->amount,
-        'added_by' => Auth::user()->id,
-        'memo' => $request->memo,
-      ]);
-
-      DB::commit();
-
+    if ($result) {
       return redirect()->back()->with('success', 'Funds added successfully!');
-    } catch (Exception $e) {
-      DB::rollBack();
-      Log::error('Failed to add funds: ' . $e->getMessage());
-      return redirect()->back()->withErrors('An error occurred while adding funds. Please try again.' + $e->getMessage());
+    } else {
+      return redirect()->back()->withErrors('An error occurred while adding funds.');
     }
   }
 
@@ -62,25 +50,30 @@ class WalletController extends Controller
       'memo' => 'required|string|max:255',
     ]);
 
-    try {
-      DB::beginTransaction();
+    $result = $this->walletService->updateFunds($request->transaction_id, $request->wallet_id, $request->amount, $request->old_amount, $request->memo);
 
-      $wallet = Wallet::findOrFail($request->wallet_id);
-      $wallet->balance -= $request->old_amount;
-      $wallet->balance += $request->amount;
-      $wallet->save();
-
-      $walletTransaction = WalletTransaction::findOrFail($request->transaction_id);
-      $walletTransaction->amount = $request->amount;
-      $walletTransaction->memo = $request->memo;
-      $walletTransaction->save();
-
-      DB::commit();
+    if ($result) {
       return redirect()->back()->with('success', 'Funds updated successfully!');
-    } catch (Exception $e) {
-      DB::rollBack();
-      Log::error('Failed to add funds: ' . $e->getMessage());
-      return redirect()->back()->withErrors('An error occurred while updating funds. Please try again.' + $e->getMessage());
+    } else {
+      return redirect()->back()->withErrors('An error occurred while updating funds.');
+    }
+  }
+
+  public function buyItem(Request $request)
+  {
+    $request->validate([
+      'amount' => 'required|numeric|min:0.01',
+      'item' => 'required|string|max:255',
+    ]);
+
+    $result = $this->walletService->buyItem(Auth::id(), $request->amount, $request->item);
+
+    if ($result === true) {
+      return redirect()->back()->with('success', 'Purchase successful!');
+    } elseif ($result === 'Insufficient funds') {
+      return redirect()->back()->withErrors('Insufficient funds.');
+    } else {
+      return redirect()->back()->withErrors('An error occurred during the purchase.');
     }
   }
 

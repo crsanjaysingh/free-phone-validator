@@ -132,6 +132,39 @@
         </div>
     </section>
     <!-- ======== feature-section end ======== -->
+<!-- ======== subscribe-section start ======== -->
+<section id="contact" class="subscribe-section pt-120">
+  <div class="container">
+      <div class="subscribe-wrapper img-bg">
+          <div class="row align-items-center">
+              <div class="col-xl-6 col-lg-7">
+                  <div class="section-title mb-15">
+                      <h2 class="text-white mb-25">Subscribe Our Newsletter</h2>
+                      <p class="pr-5 text-white">
+                          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                          diam nonumy eirmod tempor
+                      </p>
+                  </div>
+              </div>
+              <div class="col-xl-6 col-lg-5">
+                  <form id="subscribeForm" action="{{ route('newsletter.subscribe') }}" method="POST"
+                      class="subscribe-form">
+                      @csrf
+                      <input type="email" name="subscribe-email" id="subscribe-email" placeholder="Enter your email" required />
+                      <button type="submit" class="main-btn btn-hover">
+                          Subscribe
+                      </button>
+                      <div id="form-errors" class="error-container"></div>
+                      @if (session('success'))
+                          <p class="text-white">{{ session('success') }}</p>
+                      @endif
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- ======== subscribe-section end ======== -->
 @endsection
 @push('styles')
     @vite('resources/assets/frontend/css/home-page.css')
