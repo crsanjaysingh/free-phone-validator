@@ -28,8 +28,8 @@ class SubscriptionController extends Controller
 
     $user = User::with('wallet', 'subscription')->findOrFail(Auth::id());
     $wallet = $user->wallet;
-
-    if (!$wallet) {
+    $plan = Plan::findOrFail($request->plan_id);
+    if (!$wallet && !$plan->is_free) {
       return response()->json(['error' => 'Get activated your wallet by admin'], 400);
     }
 
@@ -37,7 +37,6 @@ class SubscriptionController extends Controller
       return response()->json(['error' => 'You already have an active subscription.'], 422);
     }
 
-    $plan = Plan::findOrFail($request->plan_id);
     if (!$plan->is_free) {
 
       if ($user->wallet_balance < $plan->plan_cost) {
