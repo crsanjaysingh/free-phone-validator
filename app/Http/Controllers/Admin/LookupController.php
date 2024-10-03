@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ApiResponse as Lookup;
+use App\Models\Lookup_history as Lookup;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 

@@ -35,6 +35,9 @@
           margin-right: 26px;
           margin-top: 15px;
       }
+      .selected{
+        background-color: #2e263d0f;
+      }
     </style>
     <!-- Page Specific CSS -->
 </head>

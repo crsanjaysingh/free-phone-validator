@@ -37,13 +37,9 @@ class UserPlanController extends Controller
       if (!$subscription) {
         return response()->json(['status' => 'error', 'message' => 'Subscription not found'], 404);
       }
-      Log::info("Updating status to: " . $request->subscriptionStatus);
 
       $subscription->status = $request->subscriptionStatus;
       $subscription->save();
-
-      Log::info("Saved status: " . $subscription->status);
-
 
       $message = '';
       if ($request->subscriptionStatus == 1) {

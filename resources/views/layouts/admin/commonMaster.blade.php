@@ -35,6 +35,9 @@
           margin-right: 26px;
           margin-top: 15px;
       }
+      .error {
+          color: red;
+      }
     </style>
     <!-- Page Specific CSS -->
 </head>

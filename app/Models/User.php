@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Event;
 use Spatie\Permission\Traits\HasRoles;
@@ -13,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-  use HasFactory, Notifiable, HasRoles;
+  use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
 
   protected static function booted()

@@ -18,7 +18,7 @@ $(document).ready(function () {
       { data: 'added_by', name: 'added_by' },
       { data: 'memo', name: 'memo' },
       { data: 'created_at', name: 'created_at' },
-      { data: 'action', name: 'action', orderable: false, searchable: false }
+      // { data: 'action', name: 'action', orderable: false, searchable: false }
     ].filter(Boolean)
   });
 });

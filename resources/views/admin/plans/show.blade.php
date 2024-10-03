@@ -1,4 +1,4 @@
-@extends('layouts/admmin/contentNavbarLayout')
+@extends('layouts/admin/contentNavbarLayout')
 
 @section('title', 'Create Plan - Admin')
 

@@ -11,12 +11,12 @@ use App\Http\Controllers\PricingController;
 
 Route::get('/', function () {
   return view('frontend.home', ['title' => 'Home Page']);
-})->name(name: 'home');
+})->name('home');
 
-Route::get('pricing', action: [PricingController::class, 'index'])->middleware("auth")->name(name: 'pricing');
+Route::get('pricing',  [PricingController::class, 'index'])->middleware("auth")->name(name: 'pricing');
 
-Route::get('otp-verify', action: [OtpController::class, 'show'])->name('otp.verify');
-Route::post('otp-verify', action: [OtpController::class, 'verify'])->name('otp.verify.store');
+Route::get('otp-verify', [OtpController::class, 'show'])->name('otp.verify');
+Route::post('otp-verify',  [OtpController::class, 'verify'])->name('otp.verify.store');
 Route::get('/about', function () {
   return view('frontend.about');
 })->name('about');
@@ -39,6 +39,7 @@ Route::get('refund-policy', function () {
 Route::get('faqs', function () {
   return view('frontend.faqs');
 })->name('faqs');
+
 // 1440 minute for a day
 Route::post('validate-phone', [PhoneValidationController::class, 'validatePhone'])->middleware('throttle:20,1440')->name('validate.phone');
 

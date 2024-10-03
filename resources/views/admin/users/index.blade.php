@@ -6,6 +6,15 @@
 @endsection
 
 @section('content')
+<!-- Breadcrumb Component -->
+@php
+$breadcrumbs = [
+  ['label' => 'Dashboard', 'url' => route('admin.dashboard'), 'active' => false ],
+  ['label' => 'Users', 'url' => route('admin.users.index'), 'active' => true],
+];
+@endphp
+@include('components.admin.breadcrumb', ['title' => 'Dashboard', 'breadcrumbs' => $breadcrumbs, 'styleClass' => 'breadcrumb-style1', 'cardHeader'=>false, 'cardHeaderHeading'=>"Edit Plan"])
+<!-- Breadcrumb Component -->
 <!-- Hoverable Table rows -->
 <div class="card">
   <h5 class="card-header">Users Listing</h5>

@@ -18,22 +18,27 @@
   <div style="min-height: 100vh">
     <ul class="py-1 menu-inner ps ps--active-y">
           <li class="menu-item">
-            <a href="{{ route('user.dashboard') }}" class="menu-link" style="{{ Route::is('user.dashboard') ? 'background-color: #2e263d0f;' : '' }}">
+            <a href="{{ route('user.dashboard') }}" class="menu-link {{ Route::is('user.dashboard') ? 'selected' : '' }}" style="">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div>Dashboards</div>
             </a>
         </li>
-        <li class="menu-item {{ Route::is('user.lookup.index') ? 'open' : '' }}">
+        <li class="menu-item {{ (Route::is('user.lookup.index') || Route::is('user.lookup.api')) ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
               <div>Recent Lookups</div>
           </a>
           <ul class="menu-sub">
               <li class="menu-item">
-                  <a href="{{ route('user.lookup.index') }}" class="menu-link">
+                  <a href="{{ route('user.lookup.index') }}" class="menu-link  {{ Route::is('user.lookup.index') ? 'selected' : '' }}">
                       <div>Phone Lookups</div>
                   </a>
               </li>
+              <li class="menu-item">
+                <a href="{{ route('user.lookup.api') }}" class="menu-link {{ Route::is('user.lookup.api') ? 'selected' : '' }}">
+                    <div>Phone Lookups API</div>
+                </a>
+            </li>
           </ul>
       </li>
         <li class="menu-item {{ Route::is('user.plans.index') ? 'open' : '' }}">
@@ -43,7 +48,7 @@
           </a>
           <ul class="menu-sub">
               <li class="menu-item ">
-                <a href="{{ route("user.plans.index") }}" class="menu-link">
+                <a href="{{ route("user.plans.index") }}" class="menu-link  {{ Route::is('user.plans.index') ? 'selected' : '' }}">
                     <div>My Plan</div>
                 </a>
               </li>
@@ -62,26 +67,26 @@
           </a>
           <ul class="menu-sub">
               <li class="menu-item ">
-                <a href="{{ route("user.wallet.history") }}" class="menu-link">
+                <a href="{{ route("user.wallet.history") }}" class="menu-link {{ Route::is('user.wallet.history') ? 'selected' : '' }}">
                     <div>Wallet History</div>
                 </a>
               </li>
           </ul>
         </li>
 
-        <li class="menu-item ">
+        <li class="menu-item  {{ Route::is('user.profile') ? 'opon' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-settings-2-line"></i>
               <div>Settings</div>
           </a>
           <ul class="menu-sub">
               <li class="menu-item ">
-                <a href="{{ route("user.profile") }}" class="menu-link">
+                <a href="{{ route("user.profile") }}" class="menu-link  {{ Route::is('user.profile') ? 'selected' : '' }}">
                     <div>Profile</div>
                 </a>
               </li>
               <li class="menu-item d-none ">
-                <a href="{{ route("user.profile") }}" class="menu-link">
+                <a href="{{ route("user.profile") }}" class="menu-link  {{ Route::is('user.profile') ? 'selected' : '' }}">
                     <div>Footer</div>
                 </a>
               </li>

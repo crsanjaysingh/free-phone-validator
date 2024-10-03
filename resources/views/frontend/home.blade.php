@@ -24,12 +24,24 @@
                             <a href="{{ route('login') }}" class="main-btn border-btn btn-hover wow fadeInUp"
                                 data-wow-delay=".6s">Purchase Now</a>
                         @else
-                            <a href="javascript:void(0)" class="main-btn border-btn btn-hover wow fadeInUp"
-                                data-wow-delay=".6s">Purchase
-                                Now</a>
+                        @php
+                        $status = auth()->user()->subscription->status;
+                        @endphp
+                           @if ($status == 1)
+                            <a href="{{ route('user.plans.index') }}" class="main-btn border-btn btn-hover wow fadeInUp"
+                            data-wow-delay=".6s">View Plan
+                            Now</a>
+                           @elseif($status == 2)
+                           <a href="{{ route('user.plans.index') }}" class="main-btn border-btn btn-hover wow fadeInUp"
+                           data-wow-delay=".6s">Your Plan Is Paused, Continue</a>
+                           @elseif($status == 3 || $status == 0)
+                            <a href="{{ route('user.plans.index') }}" class="main-btn border-btn btn-hover wow fadeInUp"
+                            data-wow-delay=".6s">Purchase
+                            Now</a>
+                           @endif
                         @endguest
 
-                        <a href="#features" class="scroll-bottom">
+                        <a href="#guest-validator-section" class="scroll-bottom">
                             <i class="lni lni-arrow-down"></i></a>
                     </div>
                 </div>
@@ -141,8 +153,7 @@
                   <div class="section-title mb-15">
                       <h2 class="text-white mb-25">Subscribe Our Newsletter</h2>
                       <p class="pr-5 text-white">
-                          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                          diam nonumy eirmod tempor
+                        Stay updated with the latest news, exclusive offers, and exciting updates by subscribing to our newsletter! Be the first to know about new product launches, special promotions, and expert tips delivered straight to your inbox. Submit email and never miss out!
                       </p>
                   </div>
               </div>

@@ -15,6 +15,17 @@
 @endsection
 
 @section('content')
+
+<!-- Breadcrumb Component -->
+@php
+$breadcrumbs = [
+  ['label' => 'User', 'url' => route('user.dashboard'), 'active' => false],
+  ['label' => 'Dashboard', 'url' => route('user.plans.index'), 'active' => true]
+];
+@endphp
+@include('components.admin.breadcrumb', ['title' => 'Dashboard', 'breadcrumbs' => $breadcrumbs, 'styleClass' => 'breadcrumb-style1', 'cardHeader'=>false, 'cardHeaderHeading'=>"Edit Plan"])
+<!-- Breadcrumb Component -->
+
 <div class="row gy-6">
   <!-- Congratulations card -->
   <div class="col-md-12 col-lg-4">

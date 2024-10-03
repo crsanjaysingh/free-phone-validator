@@ -27,8 +27,10 @@ class UserWalletController extends Controller
       }
       return DataTables::of($transactions)
         ->addColumn('action', function ($row) {
-          $rowData = htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8');
-          return '<button id="transaction_id_' . $row->id . '" class="btn btn-sm btn-success" data-array=\'' . $rowData . '\'>Update</button>';
+          if (Auth::user()->hasRole("admin")) {
+            $rowData = htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8');
+            return '<button id="transaction_id_' . $row->id . '" class="btn btn-sm btn-success" data-array=\'' . $rowData . '\'>Update</button>';
+          }
         })
         ->editColumn('created_at', function ($transaction) {
           return $transaction->created_at->format('m-d-Y H:i:s');
@@ -40,7 +42,7 @@ class UserWalletController extends Controller
           return $transaction->addedByUser->name ?? 'N/A';
         })
         ->editColumn('memo', function ($transaction) {
-          return strlen($transaction->memo) > 20
+          return strlen($transaction->memo) > 50
             ? substr($transaction->memo, 0, 20) . '...'
             : $transaction->memo;
         })

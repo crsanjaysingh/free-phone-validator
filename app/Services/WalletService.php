@@ -5,10 +5,13 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Wallet;
 use App\Models\WalletTransaction;
+use Collator;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use PHPUnit\TestRunner\TestResult\Collector;
 
 class WalletService
 {
@@ -84,17 +87,18 @@ class WalletService
   /**
    * Handle purchasing logic and reduce the wallet balance accordingly.
    *
-   * @param int $userId
+   * @param Collection $user
    * @param float $amount
-   * @param string $item
+   * @param string $itemDescription
    * @return bool|string
    */
-  public function buyItem(int $userId, float $amount, string $item)
+  public function buyItem($user = null, float $amount, string $itemDescription)
   {
     try {
       DB::beginTransaction();
 
-      $user = User::findOrFail($userId);
+      $user = empty($user) ? User::findOrFail(Auth::id()) : $user;
+
       $wallet = $user->wallet;
 
       if (!$wallet || $wallet->balance < $amount) {
@@ -107,8 +111,8 @@ class WalletService
       WalletTransaction::create([
         'wallet_id' => $wallet->id,
         'amount' => $amount,
-        'added_by' => $userId,
-        'memo' => 'Purchase: ' . $item,
+        'added_by' => $user->id,
+        'memo' => 'Purchased: ' . $itemDescription,
       ]);
 
       DB::commit();

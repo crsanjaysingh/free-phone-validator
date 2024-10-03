@@ -6,9 +6,27 @@
 @endsection
 
 @section('content')
+
+<!-- Breadcrumb Component -->
+@php
+$breadcrumbs = [
+  ['label' => 'Dashboard', 'url' => route('user.dashboard'), 'active' => false],
+  ['label' => 'Recent Lookups', 'url' => route('user.plans.index'), 'active' => true]
+];
+@endphp
+@include('components.user.breadcrumb', ['title' => 'Dashboard', 'breadcrumbs' => $breadcrumbs, 'styleClass' => 'breadcrumb-style1', 'cardHeader'=>false, 'cardHeaderHeading'=>"Edit Plan"])
+<!-- Breadcrumb Component -->
+
 <!-- Hoverable Table rows -->
 <div class="card">
-  <h5 class="card-header">Lookup Listing</h5>
+  <div class="row">
+    <div class="col-md-6 text-start">
+      <h5 class="card-header">Lookup Listing</h5>
+    </div>
+    <div class="mt-3 col-md-6 text-end">
+      <a href="{{ route("dashboard") }}" class="btn btn-success" style="margin-right:24px">View Lookup API</a>
+    </div>
+  </div>
   <div class="container table-responsive text-nowrap">
     <table id="lookupTable" class="table table-hover">
         <thead>

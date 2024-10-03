@@ -27,7 +27,7 @@ class PhoneValidationController extends Controller
 
     $phone = $request->phone;
     $result = $this->phoneValidationService->validatePhone($phone);
-
+    $result = (!empty($result['response_data'])) ? $result['response_data'] : $result;
     if (isset($result['error']) && $result['error']) {
       return response()->json(
         data: [
@@ -37,9 +37,6 @@ class PhoneValidationController extends Controller
         status: 500
       );
     }
-
-    $this->apiResponseService->storeResponse('phone', $request->phone, $result);
-
     if ($result['message'] === "Phone is valid.") {
       return response()->json(['status' => 'valid', 'data' => $result], 200);
     } else {

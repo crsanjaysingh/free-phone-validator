@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Services\WalletService;
 
 class SubscriptionController extends Controller
 {
@@ -25,21 +26,28 @@ class SubscriptionController extends Controller
       return response()->json(['errors' => $validator->errors()], 422);
     }
 
-    $user = Auth::user();
-    $plan = Plan::findOrFail($request->plan_id);
+    $user = User::with('wallet', 'subscription')->findOrFail(Auth::id());
+    $wallet = $user->wallet;
+
+    if (!$wallet) {
+      return response()->json(['error' => 'Get activated your wallet by admin'], 400);
+    }
 
     if ($user->subscription) {
       return response()->json(['error' => 'You already have an active subscription.'], 422);
     }
 
+    $plan = Plan::findOrFail($request->plan_id);
     if (!$plan->is_free) {
 
       if ($user->wallet_balance < $plan->plan_cost) {
         return response()->json(['error' => 'Insufficient wallet balance to subscribe to this plan.'], 422);
       }
+      $walletService = new WalletService();
+      $walletService->buyItem($user, $plan->plan_cost, $plan->plan_name);
 
-      $user->wallet_balance -= $plan->plan_cost;
-      $user->save();
+      // $user->wallet_balance -= $plan->plan_cost;
+      // $user->save();
     }
 
     $subscription = Subscription::create([
@@ -64,22 +72,25 @@ class SubscriptionController extends Controller
       return response()->json(['errors' => $validator->errors()], 400);
     }
 
-    $user = Auth::user();
-    $newPlan = Plan::findOrFail($request->plan_id);
+    $user = User::with('wallet', 'subscription')->findOrFail(Auth::id());
+    $wallet = $user->wallet;
 
-    $wallet = Wallet::where("user_id", $user->id)->first();
+    if (!$wallet) {
+      return response()->json(['error' => 'Get activated your wallet by admin'], 400);
+    }
 
-    if (!$user->subscription || !$user->subscription->active) {
+    if (!$user->subscription || !$user->subscription) {
       return response()->json(['error' => 'No active subscription found.'], 400);
     }
+
+    $newPlan = Plan::findOrFail($request->plan_id);
 
     if (!$newPlan->is_free) {
       if ($wallet->balance < $newPlan->plan_cost) {
         return response()->json(['error' => 'Insufficient wallet balance to switch to this plan.'], 400);
       }
-
-      $wallet->balance -= $newPlan->plan_cost;
-      $wallet->save();
+      $walletService = new WalletService();
+      $walletService->buyItem($user, $newPlan->plan_cost, $newPlan->name);
     }
 
     $user->subscription->update([

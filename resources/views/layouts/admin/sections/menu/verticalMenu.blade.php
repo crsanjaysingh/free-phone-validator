@@ -18,12 +18,12 @@
   <div style="min-height: 100vh">
     <ul class="py-1 menu-inner ps ps--active-y">
           <li class="menu-item open">
-            <a href="{{ route("admin.dashboard") }}" class="menu-link open">
+            <a href="{{ route("admin.dashboard") }}" class="menu-link open" style="{{ Route::is('admin.dashboard') ? 'background-color: #2e263d0f;' : '' }}">
                 <i class="menu-icon tf-icons ri-home-smile-line"></i>
                 <div>Dashboards</div>
             </a>
         </li>
-        <li class="menu-item ">
+        <li class="menu-item {{ Route::is('admin.users.index') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
               <div>Users</div>
@@ -36,7 +36,7 @@
               </li>
           </ul>
         </li>
-        <li class="menu-item ">
+        <li class="menu-item {{ Route::is('admin.lookup.index') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
               <div>Recent Lookups</div>
@@ -49,7 +49,7 @@
               </li>
           </ul>
         </li>
-        <li class="menu-item ">
+        <li class="menu-item {{ Route::is('admin.plans.index') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
               <div>Plans</div>
@@ -62,7 +62,7 @@
               </li>
           </ul>
         </li>
-        <li class="menu-item ">
+        <li class="menu-item {{ Route::is('admin.wallet.history') ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-layout-2-line"></i>
               <div>Transactions</div>
@@ -75,7 +75,7 @@
               </li>
           </ul>
         </li>
-        <li class="menu-item ">
+        <li class="menu-item {{ (Route::is('admin.profile') || Route::is('admin.profile')) ? 'open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle waves-effect">
               <i class="menu-icon tf-icons ri-settings-2-line"></i>
               <div>Settings</div>

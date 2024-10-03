@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth', 'verified', 'role:user'], 'prefix' => 'us
 
   // Lookups
   Route::get('recent-lookups', [LookupController::class, 'index'])->name('lookup.index');
-  Route::get('recent-lookups/data', [LookupController::class, 'getData'])->name('lookup.data');
+  Route::get('recent-lookups/api', [LookupController::class, 'api'])->name('lookup.api');
 
   // Plans
   Route::get('my-plan', [UserPlanController::class, 'index'])->name(name: 'plans.index');
