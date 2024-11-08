@@ -30,7 +30,7 @@
                                 @endif
                                 @if (auth()->check())
                                     <li class="nav-item">
-                                        <a  href="#">API</a>
+                                        <a  href="{{ route('user.lookup.api') }}">API</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="navbar" href="{{ route("pricing") }}">Pricing</a>
