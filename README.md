@@ -8,11 +8,14 @@ Supports standard phone number formats for both the US and Canada. Efficient Val
 
 #Installation 
 
--Clone the repository: git clone https://github.com/crsanjaysingh/free-phone-validator.git
--Navigate to the project directory and install dependencies: cd free-phone-validator composer install
--Configure your .env file and set up the database.
--Run the migrations: php artisan migrate
--Start the Laravel server: php artisan serve
+- Clone the repository: `git clone https://github.com/crsanjaysingh/free-phone-validator.git`
+- Navigate to the project directory and install dependencies:  
+  `cd free-phone-validator`  
+  `composer install`
+- Configure your `.env` file and set up the database.
+- Run the migrations: `php artisan migrate`
+- Start the Laravel server: `php artisan serve`
+
 
 #Usage 
 
